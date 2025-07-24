@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+html, body {
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Lobster, Georgia, serif;
+  color: #545454;
+}
+
+.container {
+  padding: 0 20px;
+      
+    margin-top: auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.4rem;
+  margin: 0 0 0.8em;
+  
+  @media screen and (min-width: 400px) {
+    font-size: 3rem;
+  }
+}
+
+.levels {
+  
+    display: flex;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0 -15px;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    align-content: center;
+
+    
+  > li {
+    margin: 0 15px 30px;
+    padding: 5px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #f6f6f6;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.1);
+    position: relative;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+        
+    &:hover {
+      color: #fff;
+      background-color: #99ce2a;
+      transform: scale(1.04);
+    }
+    
+    @media screen and (min-width: 480px) {
+      width: 180px;
+      height: 180px;
+    }
+    
+  }
+  
+  
+}
+
+
+
+.btn {
+ 
+	
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.5s ease-in-out;
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  background: #040f16;
+  color: #f5f5f5;
+  cursor: pointer;
+}
+
+.btn:hover {
+  box-shadow: 0 0 20px 0px #2e2e2e3a;
+}
+
+.btn .icon {
+  position: absolute;
+  height: 40px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.btn .text {
+  transform: translateX(55px);
+}
+
+.btn:hover .icon {
+  width: 175px;
+}
+
+.btn:hover .text {
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active .icon {
+  transform: scale(0.85);
+}
+
+
+
+
+
+
+
+ body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .level-selection {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .level-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .level-button {
+            width: 80px;
+            height: 80px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .level-button:hover:not(.locked) {
+            background-color: #0056b3;
+        }
+        
+        /* New CSS for locked levels */
+        .level-button.locked {
+            background-color: #ccc;
+            cursor: not-allowed;
+            color: #666;
+            position: relative;
+        }
+
+        .level-button.locked::after {
+            content: '🔒';
+            font-size: 2em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #666;
+        }
+    </style>
+    
+</head>
+<body>
+
+
+
+    <div class="container">
+        <h1>Select your level:</h1>
+        <ul class="levels" id="levelSelect">
+            <li onclick="window.location.href='game.html?level=0'">Level 1</li> 
+            <li onclick="window.location.href='game.html?level=1'">Level 2</li> 
+            <li onclick="window.location.href='game.html?level=2'">Level 3</li> 
+             <li onclick="window.location.href='game.html?level=3'">Level 4</li> 
+            <li onclick="window.location.href='game.html?level=4'">Level 5</li> 
+            
+          </ul>
+       <ul style="justify-items: center;">
+          <button class="btn" onclick="history.back()">
+    <span class="icon">
+        <svg viewBox="0 0 175 80" width="40" height="40">
+            <rect width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+            <rect y="30" width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+            <rect y="60" width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+        </svg>
+    </span>
+    <span class="text">MENU</span>
+</button>
+        </ul>
+      
+    </div>
+
+
+   
+  
+  
+
+
+</body>
+</html>

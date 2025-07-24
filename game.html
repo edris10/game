@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> yary kura haraka </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    background-image: url(testt.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    gap: 5px;
+    padding: 10px; /* Add some padding for mobile */
+    /* margin: 30px; */
+    box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+    margin: 30px;
+  }
+
+  .text {
+    background-color: rgba(6, 2, 10, 0);
+    direction: rtl;
+    
+    unicode-bidi: bidi-override;
+    margin-top: 5px; /* Smaller margin for mobile */
+    text-align: center;
+    font-size: 15px; /* Smaller font size for mobile */
+  }
+
+  canvas {
+    border: none;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 8px;
+    max-width: 90vw; /* Make canvas responsive */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .game-controls-container {
+    display: flex;
+    justify-content: space-around;
+    align-content: stretch;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    width: 100%; /* Full width for controls */
+  }
+
+  .top-controls, .bottom-controls, .level-selection, .control-buttons, .level-menu {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: rgb(25, 51, 26,0.4);
+    color: white;
+    border: none;
+    padding: 8px; /* Reduced padding for mobile */
+    font-size: 10px; /* Reduced font size for mobile */
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 30px; /* Reduced min-width */
+  }
+  .level-selection{
+    display: none;
+  }
+
+  button, select {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    min-width: 40px;
+  }
+
+  /* Specific styles for control buttons to make them larger and more mobile-friendly */
+  .control-buttons button {
+    padding: 15px 20px; /* Larger buttons for easier tapping */
+    font-size: 18px;
+  }
+
+  button:hover {
+    background-color: #45a049;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  button:active {
+    transform: scale(0.95);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  select {
+    padding: 4px 6px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 1px rgba(76, 175, 80, 0.3);
+  }
+
+  #levelDisplay {
+    background-color: #45a049;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 3px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* background-color: rgba(0,0,0,0.4); */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Larger width for better mobile view */
+    max-width: 300px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+  .modal-content h2 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  .modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .modal-buttons button {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+  }
+
+  /* Media Query for smaller screens (e.g., phones) */
+  @media (max-width: 600px) {
+    .game-controls-container {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .top-controls, .level-menu {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .control-buttons {
+      width: 100%;
+      justify-content:center;
+    }
+
+    canvas {
+      max-width: 95vw;
+      max-height: 50vh;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <audio id="goalSound" src="Aye Dast xosh .mp3" preload="auto"></audio>
+  <audio id="block" src="block.wav" preload="auto"></audio>
+  <audio id="run" src="rt.mp3" preload="auto"></audio>
+  <audio id="fix" src="Boye nabet.mp3" preload="auto"></audio>
+
+
+  <div class="game-controls-container">
+    <div class="top-controls">
+      <div id="levelDisplay"><b>Level:</b> 1</div>
+      <button onclick="restartLevel()">🔁 Restart</button>
+      <button onclick="window.location.href='index.html'">🏠 Menu</button>
+      <button onclick="window.location.href='level.html'"> Level </button>
+
+    </div>
+
+    <div class="level-selection">
+      <label for="levelSelect"><b>Select:</b></label>
+      <select id="levelSelect" onchange="selectLevel(this.value)">
+        <option value="0">L1</option>
+        <option value="1">L2</option>
+        <option value="2">L3</option>
+        <option value="3">L4</option>
+        <option value="4">L5</option>
+        
+      </select>
+    </div>
+  </div>
+
+  <canvas width="500" height="350" id="game"></canvas>
+
+  <div class="control-buttons">
+    <button onclick="moveLeft()">⬅️</button>
+    <button onclick="moveDown()">⬇️</button>
+    <button onclick="moveRight()">➡️</button>
+  </div>
+
+  <div class="level-menu">
+    <div class="text">
+    <div><b>کۆنتڕۆڵەکان</b></div>
+    <div><b>تیری چەپ / ڕاست:</b>جوڵەی چەپ / ڕاست</div>
+    <div><b>تیری خوارەوە:</b> بلۆک هەڵگرتن یان دابەزاندن</div>
+  </div>
+  </div>
+  
+
+  <div id="levelCompletionModal" class="modal">
+    <div class="modal-content">
+      <h2>🎉 Level Complete!</h2>
+      <div class="modal-buttons">
+        <button onclick="nextLevel()">Next Level ➡️</button>
+        <button onclick="yakamrestartLevel()"> restart Level 🔁</button>
+        <button onclick="window.location.href='index.html'"> Go to Menu 🏠</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+
+const canvas = document.getElementById('game');
+const context = canvas.getContext('2d');
+
+let grid = 32;
+
+// --- Wall Canvas for pre-rendering complex wall texture ---
+const wallCanvas = document.createElement('canvas');
+const wallCtx = wallCanvas.getContext('2d');
+wallCanvas.width = wallCanvas.height = grid;
+
+// --- Wall Design (More detailed bricks) ---
+function drawWall(ctx, x, y, size) {
+    const brickColor1 = '#8B4513';
+    const brickColor2 = '#A0522D';
+    const mortarColor = '#A9A9A9';
+
+    ctx.fillStyle = mortarColor;
+    ctx.fillRect(x, y, size, size);
+
+    const brickHeight = size / 3 - 1;
+    const brickWidth = size / 2 - 1;
+
+    ctx.fillStyle = brickColor1;
+    ctx.fillRect(x + 1, y + 1, brickWidth, brickHeight);
+    ctx.fillStyle = brickColor2;
+    ctx.fillRect(x + brickWidth + 2, y + 1, brickWidth, brickHeight);
+
+    ctx.fillStyle = brickColor2;
+    ctx.fillRect(x + 1, y + brickHeight + 2, brickWidth / 2 - 1, brickHeight);
+    ctx.fillStyle = brickColor1;
+    ctx.fillRect(x + brickWidth / 2 + 1, y + brickHeight + 2, brickWidth, brickHeight);
+    ctx.fillStyle = brickColor2;
+    ctx.fillRect(x + brickWidth * 1.5 + 2, y + brickHeight + 2, brickWidth / 2 - 1, brickHeight);
+
+    ctx.fillStyle = brickColor1;
+    ctx.fillRect(x + 1, y + (brickHeight * 2) + 3, brickWidth, brickHeight);
+    ctx.fillStyle = brickColor2;
+    ctx.fillRect(x + brickWidth + 2, y + (brickHeight * 2) + 3, brickWidth, brickHeight);
+
+    ctx.fillStyle = 'rgba(0,0,0,0.15)';
+    ctx.fillRect(x + 1, y + 1, brickWidth, 2);
+    ctx.fillRect(x + 1, y + brickHeight, brickWidth, 2);
+    ctx.fillRect(x + brickWidth + 2, y + 1, brickWidth, 2);
+    ctx.fillRect(x + brickWidth + 2, y + brickHeight, brickWidth, 2);
+}
+
+drawWall(wallCtx, 0, 0, grid);
+
+
+let playerDir = { row: 0, col: 0 };
+let playerPos = { row: 0, col: 0 };
+let playerFacing = -1;
+let rAF = null;
+let carryingBlock = false;
+let width = 0;
+
+const types = {
+  wall: '#',
+  player: '@',
+  block: '$',
+  goal: '.',
+  empty: ' '
+};
+
+const levels = [
+    `
+   #    ##        ##
+   #                #
+   #                 #
+   #                   #
+   #                   #
+   #                   #
+   #    .           @  #
+   #####################
+      
+  `.trim(),
+  `
+   #    ##        ##
+   #                #
+   #                 #
+   #                   #
+   #                   #
+   #         #         #
+   #     .   #      @ $#
+   #####################
+      
+  `.trim(),
+  `
+   #    ##        ##
+   #                #
+  ##                 #
+  #.                  #
+  ##                   #
+   #           #  $    #
+   #           #$ $$@  #
+   #####   #############
+       #  $#
+       #####
+  `.trim(),
+
+  `
+   #              #
+   #    ##        #
+   #           #    #
+  ##           #   . #
+  #       #############
+  #$  #####            #
+   #           #  $    #
+   #           #$ $$@  #
+   #####   #############
+       #$ $#
+       #####
+  `.trim(),
+
+  `
+  ####################
+  #                  #
+  #  .   #           #
+  ########           #
+  #       #######    #
+  #                 $#
+  #             ######
+  #      $$            #
+  #     $$$         @ $#
+  #####################
+  `.trim(),
+];
+
+let currentLevel = 0;
+let cells = [];
+
+function loadLevel(levelIndex) {
+  const level = levels[levelIndex];
+  width = 0;
+  cells = [];
+  level.split('\n')
+    .filter(rowData => !!rowData)
+    .forEach((rowData, row) => {
+      cells[row] = [];
+      if (rowData.length > width) width = rowData.length;
+      rowData.split('').forEach((colData, col) => {
+        cells[row][col] = colData;
+        if (colData === types.player) {
+          playerPos = { row, col };
+        }
+      });
+    });
+
+  document.getElementById("levelDisplay").innerText = "Level: " + (levelIndex + 1);
+  document.getElementById("levelSelect").value = levelIndex;
+  playerDir = { row: 0, col: 0 };
+  width = Math.max(width, 12);
+  carryingBlock = false; // Reset carrying block status
+  resizeCanvas(); // Resize canvas when level loads
+
+  const nextLevelButton = document.getElementById("nextLevelButton");
+  if (nextLevelButton) {
+      nextLevelButton.disabled = true;
+      nextLevelButton.style.backgroundColor = '#cccccc';
+      nextLevelButton.style.cursor = 'not-allowed';
+  }
+}
+
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+const urlLevel = getUrlParameter('level');
+if (urlLevel !== '') {
+    const parsedLevel = parseInt(urlLevel);
+    if (!isNaN(parsedLevel) && parsedLevel >= 0 && parsedLevel < levels.length) {
+        currentLevel = parsedLevel;
+    } else {
+        currentLevel = 0;
+    }
+}
+
+loadLevel(currentLevel);
+
+function moveLeft() {
+  playerDir = { row: 0, col: -1 };
+  playSoundById("block");
+}
+
+function moveRight() {
+  playerDir = { row: 0, col: 1 };
+  playSoundById("block");
+}
+
+function moveDown() {
+  const nextCol = playerFacing + playerPos.col;
+  const nextCell = cells[playerPos.row][nextCol];
+  const cellAbove = cells[playerPos.row - 1] ? cells[playerPos.row - 1][nextCol] : undefined;
+
+  if (!carryingBlock && nextCell === types.block && cellAbove === types.empty) {
+    cells[playerPos.row][nextCol] = types.empty;
+    cells[playerPos.row - 1][playerPos.col] = types.block;
+    carryingBlock = true;
+    playSoundById("block");
+  } else if (carryingBlock) {
+    let row = playerPos.row;
+    let finalDropRow = row;
+
+    if (nextCell === types.empty) {
+      let rowBelow = row + 1;
+      let belowCell = cells[rowBelow] ? cells[rowBelow][nextCol] : undefined;
+      while (belowCell === types.empty || belowCell === types.goal) {
+        finalDropRow = rowBelow;
+        rowBelow++;
+        belowCell = cells[rowBelow] ? cells[rowBelow][nextCol] : undefined;
+        if (rowBelow >= cells.length || belowCell === undefined) break;
+      }
+    } else if (nextCell === types.wall || nextCell === types.block) {
+      if (cellAbove === types.empty) {
+        finalDropRow = playerPos.row - 1;
+      } else {
+        playSoundById("fix");
+        return;
+      }
+    } else {
+        playSoundById("fix");
+        return;
+    }
+
+    cells[playerPos.row - 1][playerPos.col] = types.empty;
+    cells[finalDropRow][nextCol] = types.block;
+    carryingBlock = false;
+    playSoundById("block");
+  }
+
+  requestAnimationFrame(loop);
+}
+
+function onLevelComplete(currentLevel) {
+    const highestCompleted = parseInt(localStorage.getItem('completedLevel')) || 0;
+    
+    if (currentLevel > highestCompleted) {
+        localStorage.setItem('completedLevel', currentLevel);
+        console.log(`Level ${currentLevel} completed and progress saved!`);
+    }
+    
+    window.location.href = 'level.html';
+}
+
+function clamp(min, max, value) {
+  return Math.min(Math.max(min, value), max);
+}
+
+function restartLevel() {
+  carryingBlock = false;
+  loadLevel(currentLevel);
+  playerDir = { row: 0, col: 0 };
+  cancelAnimationFrame(rAF);
+  requestAnimationFrame(loop);
+  playSoundById("run");
+  document.getElementById('levelCompletionModal').style.display = 'none';
+}
+function yakamrestartLevel() {
+  carryingBlock = false;
+  loadLevel(currentLevel);
+  playerDir = { row: 0, col: 0 };
+  cancelAnimationFrame(rAF);
+  requestAnimationFrame(loop);
+  // playSoundById("run");
+  document.getElementById('levelCompletionModal').style.display = 'none';
+}
+
+function selectLevel(levelIndex) {
+  currentLevel = parseInt(levelIndex);
+  carryingBlock = false;
+  loadLevel(currentLevel);
+  cancelAnimationFrame(rAF);
+  requestAnimationFrame(loop);
+  document.getElementById('levelCompletionModal').style.display = 'none';
+}
+
+function nextLevel() {
+  document.getElementById('levelCompletionModal').style.display = 'none';
+  if (currentLevel < levels.length - 1) {
+    currentLevel++;
+    carryingBlock = false;
+    loadLevel(currentLevel);
+    cancelAnimationFrame(rAF);
+    requestAnimationFrame(loop);
+  } else {
+    showMessage("🏁 All levels complete! Redirecting to Level Selection...", 2000);
+    setTimeout(() => {
+        window.location.href = 'level.html';
+    }, 2000);
+  }
+}
+
+function showMessage(text, duration = 10000) {
+  const msg = document.createElement("div");
+  msg.innerText = text;
+  msg.style.position = "absolute";
+  msg.style.top = "10px";
+  msg.style.background = "white";
+  msg.style.color = "black";
+  msg.style.padding = "5px 10px";
+  msg.style.border = "1px solid black";
+  msg.style.borderRadius = "5px";
+  msg.style.fontSize = "14px";
+  msg.style.zIndex = "1000";
+  document.body.appendChild(msg);
+
+  setTimeout(() => {
+    msg.remove();
+  }, duration);
+}
+
+function move(startPos, endPos) {
+  const startCell = cells[startPos.row][startPos.col];
+
+  const isPlayer = startCell === types.player;
+
+  switch(startCell) {
+    case types.player:
+    case types.block:
+      cells[startPos.row][startPos.col] = types.empty;
+      break;
+  }
+
+  const endCellContent = cells[endPos.row][endPos.col];
+
+  switch(endCellContent) {
+    case types.empty:
+      cells[endPos.row][endPos.col] = isPlayer ? types.player : types.block;
+      break;
+    case types.goal:
+        cells[endPos.row][endPos.col] = isPlayer ? types.player : types.block;
+        break;
+  }
+
+  playerFacing = endPos.col - startPos.col;
+
+  if (carryingBlock) {
+    cells[startPos.row - 1][startPos.col] = types.empty;
+    cells[endPos.row - 1][endPos.col] = types.block;
+  }
+}
+
+function playSoundById(id) {
+  const sound = document.getElementById(id);
+  if (sound) {
+    sound.currentTime = 0;
+    sound.play().catch(() => {});
+  }
+}
+
+
+function resizeCanvas() {
+  const gameContainer = document.querySelector('body');
+  const availableWidth = gameContainer.clientWidth - 20; // 20 for padding
+  const availableHeight = gameContainer.clientHeight - (document.querySelector('.game-controls-container').clientHeight + document.querySelector('.control-buttons').clientHeight + 40); // 40 for margins/gaps
+
+  const maxCellsX = 12; // Number of cells to show horizontally
+  const maxCellsY = 8;  // Number of cells to show vertically
+
+  const newGridSizeX = Math.floor(availableWidth / maxCellsX);
+  const newGridSizeY = Math.floor(availableHeight / maxCellsY);
+  
+  grid = Math.min(newGridSizeX, newGridSizeY);
+  grid = Math.max(grid, 16); // Minimum grid size to avoid being too small
+  
+  canvas.width = grid * Math.min(width, maxCellsX);
+  canvas.height = grid * Math.min(cells.length, maxCellsY);
+
+  wallCanvas.width = wallCanvas.height = grid;
+  drawWall(wallCtx, 0, 0, grid);
+}
+
+
+function loop() {
+  rAF = requestAnimationFrame(loop);
+  context.clearRect(0,0,canvas.width,canvas.height);
+
+  let row = playerPos.row + playerDir.row;
+  const col = playerPos.col + playerDir.col;
+  const cell = cells[row] ? cells[row][col] : undefined;
+
+  if (cell !== undefined) {
+    switch(cell) {
+      case types.empty:
+      case types.goal:
+        let rowBelow = row + 1 + playerDir.row;
+        let belowCell = cells[rowBelow] ? cells[rowBelow][col] : undefined;
+        while (belowCell === types.empty || belowCell === types.goal) {
+          row = rowBelow;
+          rowBelow = row + 1 + playerDir.row;
+          belowCell = cells[rowBelow] ? cells[rowBelow][col] : undefined;
+          if (rowBelow >= cells.length || belowCell === undefined) break;
+        }
+
+        move(playerPos, { row, col });
+
+        playerPos.row = row;
+        playerPos.col = col;
+
+        if (cell === types.goal) {
+          playSoundById("goalSound");
+          cancelAnimationFrame(rAF);
+          document.getElementById('levelCompletionModal').style.display = 'flex';
+          const nextLevelButton = document.getElementById("nextLevelButton");
+          if (nextLevelButton) {
+              nextLevelButton.disabled = false;
+              nextLevelButton.style.backgroundColor = '#4CAF50';
+              nextLevelButton.style.cursor = 'pointer';
+          }
+        }
+        break;
+
+      case types.block:
+      case types.wall:
+        const rowAbove = row - 1 + playerDir.row;
+        const nextCell = cells[rowAbove] ? cells[rowAbove][col] : undefined;
+
+        if (nextCell === types.empty || nextCell === types.goal) {
+          move(playerPos, { row: rowAbove, col });
+
+          playerPos.row = rowAbove;
+          playerPos.col = col;
+        }
+        break;
+    }
+  }
+
+  playerDir = { row: 0, col: 0 };
+
+  context.strokeStyle = 'black';
+  context.fillStyle = 'black';
+  context.lineWidth = 2;
+
+  const startRow = clamp(0, cells.length - Math.min(cells.length, 8), playerPos.row - 4);
+  const startCol = clamp(0, width - Math.min(width, 12), playerPos.col - 6);
+
+  for (let row = startRow; row < cells.length; row++) {
+    for (let col = startCol; col < cells[row].length; col++) {
+      const cell = cells[row][col];
+      const drawRow = row - startRow;
+      const drawCol = col - startCol;
+
+      switch(cell) {
+        case types.wall:
+          context.drawImage(wallCanvas, drawCol * grid, drawRow * grid);
+          break;
+
+        case types.block:
+          context.save();
+          context.translate(drawCol * grid, drawRow * grid);
+          context.fillStyle = '#8B4513';
+          context.fillRect(0, 0, grid, grid);
+          let gradient = context.createLinearGradient(0, 0, grid, grid);
+          gradient.addColorStop(0, 'rgba(255,255,255,0.2)');
+          gradient.addColorStop(1, 'rgba(0,0,0,0.2)');
+          context.fillStyle = gradient;
+          context.fillRect(0, 0, grid, grid);
+          context.strokeStyle = '#5A2D0C';
+          context.lineWidth = 2;
+          context.strokeRect(1, 1, grid - 2, grid - 2);
+          context.restore();
+          break;
+
+        case types.goal:
+          context.save();
+          context.translate((drawCol + 0.5) * grid, (drawRow + 0.5) * grid);
+          context.beginPath();
+          context.arc(0, 0, grid * 0.45, 0, Math.PI * 2);
+          context.fillStyle = '#FFD700';
+          context.fill();
+          context.strokeStyle = '#DAA520';
+          context.lineWidth = 2;
+          context.stroke();
+          context.beginPath();
+          const spikes = 5;
+          const outerRadius = grid * 0.3;
+          const innerRadius = grid * 0.15;
+          for (let i = 0; i < spikes; i++) {
+              let angle = (i * Math.PI * 2 / spikes) - (Math.PI / 2);
+              context.lineTo(Math.cos(angle) * outerRadius, Math.sin(angle) * outerRadius);
+              angle += Math.PI / spikes;
+              context.lineTo(Math.cos(angle) * innerRadius, Math.sin(angle) * innerRadius);
+          }
+          context.closePath();
+          context.fillStyle = '#FFFFFF';
+          context.fill();
+          context.strokeStyle = '#8B0000';
+          context.lineWidth = 1;
+          context.stroke();
+          context.restore();
+          break;
+
+        case types.player:
+          context.save();
+          context.translate((drawCol + 0.5) * grid, (drawRow + 0.5) * grid);
+          context.fillStyle = '#007BFF';
+          context.fillRect(-grid * 0.15, -grid * 0.3, grid * 0.3, grid * 0.5);
+          context.beginPath();
+          context.arc(0, -grid * 0.45, grid * 0.18, 0, Math.PI * 2);
+          context.fillStyle = '#FFDAB9';
+          context.fill();
+          context.strokeStyle = '#333';
+          context.lineWidth = 1;
+          context.stroke();
+          context.fillStyle = 'black';
+          const eyeOffset = playerFacing * grid * 0.05;
+          context.beginPath();
+          context.arc(eyeOffset - grid * 0.05, -grid * 0.5, 1.5, 0, Math.PI * 2);
+          context.arc(eyeOffset + grid * 0.05, -grid * 0.5, 1.5, 0, Math.PI * 2);
+          context.fill();
+          context.beginPath();
+          context.arc(0, -grid * 0.55, grid * 0.2, Math.PI, Math.PI * 2);
+          context.lineTo(grid * 0.2, -grid * 0.55);
+          context.lineTo(grid * 0.25, -grid * 0.5);
+          context.lineTo(-grid * 0.25, -grid * 0.5);
+          context.lineTo(-grid * 0.2, -grid * 0.55);
+          context.closePath();
+          context.fillStyle = '#FF4500';
+          context.fill();
+          context.strokeStyle = '#CD3700';
+          context.lineWidth = 1;
+          context.stroke();
+          context.strokeStyle = '#007BFF';
+          context.lineWidth = 3;
+          context.beginPath();
+          context.moveTo(-grid * 0.15, -grid * 0.2);
+          context.lineTo(-grid * 0.35, -grid * 0.1);
+          context.moveTo(grid * 0.15, -grid * 0.2);
+          context.lineTo(grid * 0.35, -grid * 0.1);
+          context.stroke();
+          context.beginPath();
+          context.moveTo(-grid * 0.1, grid * 0.1);
+          context.lineTo(-grid * 0.15, grid * 0.45);
+          context.moveTo(grid * 0.1, grid * 0.1);
+          context.lineTo(grid * 0.15, grid * 0.45);
+          context.stroke();
+          context.restore();
+          break;
+      }
+    }
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  playerDir = { row: 0, col: 0};
+  if (e.which === 37) {
+    playerDir.col = -1;
+    playSoundById("block");
+  } else if (e.which === 39) {
+    playerDir.col = 1;
+    playSoundById("block");
+  } else if (e.which === 40) {
+    moveDown();
+    e.preventDefault();
+  }
+});
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas(); // Initial call to set canvas size
+
+// start the game
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
