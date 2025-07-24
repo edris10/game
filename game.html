@@ -3,7 +3,8 @@
 <head>
   <title> yary kura haraka </title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta name="viewport" content="width=device-width, user-scalable=no">
   <style>
   html, body {
     height: 100%;
@@ -272,6 +273,11 @@ const wallCanvas = document.createElement('canvas');
 const wallCtx = wallCanvas.getContext('2d');
 wallCanvas.width = wallCanvas.height = grid;
 
+
+
+
+
+
 // --- Wall Design (More detailed bricks) ---
 function drawWall(ctx, x, y, size) {
     const brickColor1 = '#8B4513';
@@ -317,6 +323,8 @@ let playerFacing = -1;
 let rAF = null;
 let carryingBlock = false;
 let width = 0;
+
+
 
 const types = {
   wall: '#',
@@ -424,6 +432,8 @@ function loadLevel(levelIndex) {
       nextLevelButton.style.cursor = 'not-allowed';
   }
 }
+
+
 
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -540,6 +550,7 @@ function selectLevel(levelIndex) {
   requestAnimationFrame(loop);
   document.getElementById('levelCompletionModal').style.display = 'none';
 }
+
 
 function nextLevel() {
   document.getElementById('levelCompletionModal').style.display = 'none';
@@ -676,6 +687,8 @@ function loop() {
           }
         }
         break;
+
+        
 
       case types.block:
       case types.wall:
