@@ -4,7 +4,11 @@
   <title> yary kura haraka </title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+        html {
+        touch-action: manipulation;
+    }
   html, body {
     height: 100%;
     margin: 0;
@@ -212,6 +216,7 @@
 
   <div class="game-controls-container">
     <div class="top-controls">
+          
       <div id="levelDisplay"><b>Level:</b> 1</div>
       <button onclick="restartLevel()">🔁 Restart</button>
       <button onclick="window.location.href='index.html'">🏠 Menu</button>
@@ -255,10 +260,14 @@
       <div class="modal-buttons">
         <button onclick="nextLevel()">Next Level ➡️</button>
         <button onclick="yakamrestartLevel()"> restart Level 🔁</button>
+        <!-- <button onclick="localStorage.removeItem('completedLevel'); location.reload();">restart Level 🔁</button> -->
         <button onclick="window.location.href='index.html'"> Go to Menu 🏠</button>
       </div>
     </div>
   </div>
+
+
+  
 
 <script>
 
@@ -271,6 +280,11 @@ let grid = 32;
 const wallCanvas = document.createElement('canvas');
 const wallCtx = wallCanvas.getContext('2d');
 wallCanvas.width = wallCanvas.height = grid;
+
+
+
+
+
 
 // --- Wall Design (More detailed bricks) ---
 function drawWall(ctx, x, y, size) {
@@ -318,6 +332,8 @@ let rAF = null;
 let carryingBlock = false;
 let width = 0;
 
+
+
 const types = {
   wall: '#',
   player: '@',
@@ -327,6 +343,10 @@ const types = {
 };
 
 const levels = [
+
+
+
+
     `
    #    ##        ##
    #                #
@@ -349,18 +369,20 @@ const levels = [
    #####################
       
   `.trim(),
-  `
-   #    ##        ##
-   #                #
-  ##                 #
-  #.                  #
-  ##                   #
-   #           #  $    #
-   #           #$ $$@  #
-   #####   #############
-       #  $#
-       #####
-  `.trim(),
+
+
+ `
+  #    ##        ##
+  #                #
+ ##                 #
+#.                   #
+###                   #
+  #           #  $    #
+  #           #$ $$@  #
+  #####   #############
+      #  $#
+      #####
+`.trim(),
 
   `
    #              #
@@ -408,6 +430,8 @@ function loadLevel(levelIndex) {
           playerPos = { row, col };
         }
       });
+      localStorage.setItem('completedLevel', Math.max(currentLevel, parseInt(localStorage.getItem('completedLevel')) || 0));
+
     });
 
   document.getElementById("levelDisplay").innerText = "Level: " + (levelIndex + 1);
@@ -424,6 +448,14 @@ function loadLevel(levelIndex) {
       nextLevelButton.style.cursor = 'not-allowed';
   }
 }
+
+
+
+
+
+
+
+
 
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -509,6 +541,15 @@ function onLevelComplete(currentLevel) {
     window.location.href = 'level.html';
 }
 
+function onLevelComplete(currentLevel) {
+    const highestCompleted = parseInt(localStorage.getItem('completedLevel')) || 0;
+    if (currentLevel > highestCompleted) {
+        localStorage.setItem('completedLevel', currentLevel);
+    }
+    window.location.href = 'level.html';
+}
+
+
 function clamp(min, max, value) {
   return Math.min(Math.max(min, value), max);
 }
@@ -541,6 +582,7 @@ function selectLevel(levelIndex) {
   document.getElementById('levelCompletionModal').style.display = 'none';
 }
 
+
 function nextLevel() {
   document.getElementById('levelCompletionModal').style.display = 'none';
   if (currentLevel < levels.length - 1) {
@@ -556,6 +598,10 @@ function nextLevel() {
     }, 2000);
   }
 }
+
+
+
+
 
 function showMessage(text, duration = 10000) {
   const msg = document.createElement("div");
@@ -677,6 +723,8 @@ function loop() {
         }
         break;
 
+        
+
       case types.block:
       case types.wall:
         const rowAbove = row - 1 + playerDir.row;
@@ -688,7 +736,12 @@ function loop() {
           playerPos.row = rowAbove;
           playerPos.col = col;
         }
+
+
+        
         break;
+
+        
     }
   }
 
@@ -758,6 +811,7 @@ function loop() {
           break;
 
         case types.player:
+          
           context.save();
           context.translate((drawCol + 0.5) * grid, (drawRow + 0.5) * grid);
           context.fillStyle = '#007BFF';
