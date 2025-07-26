@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(testt.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        h2 {
+            margin: 20px 0 10px;
+            color: #4CAF50;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .features {
+            margin-left: 20px;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .menu-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #45a049;
+        }
+
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .kurdish {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu-button {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .language-toggle {
+                position: static;
+                margin-bottom: 15px;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content-container">
+        <button class="language-toggle" id="language-toggle">کوردی / Kurdish</button>
+        
+        <h1 id="title">About Block Game</h1>
+        
+        <p id="welcome-text">Welcome to Block Game, a challenging puzzle game where you navigate through levels by moving blocks and reaching the goal!</p>
+        
+        <h2 id="features-title">Game Features</h2>
+        <ul class="features" id="features-list">
+            <li>Multiple challenging levels with increasing difficulty</li>
+            <li>Simple controls - move left/right and drop blocks</li>
+            <li>Progress saving - your completed levels are saved</li>
+            <li>Responsive design - play on desktop or mobile devices</li>
+            <li>Engaging sound effects for better gameplay experience</li>
+        </ul>
+        
+        <h2 id="how-to-play-title">How to Play</h2>
+        <p id="how-to-play-text">Use the left and right buttons to move your character. Press the down button to pick up or drop blocks. Your goal is to reach the golden circle in each level by strategically moving blocks to create a path.</p>
+        
+        <h2 id="about-dev-title">About the Developer</h2>
+        <p id="about-dev-text">This game was created as a fun project to challenge players' problem-solving skills. The developer enjoys creating interactive experiences that are both entertaining and mentally stimulating.</p>
+        
+        <div class="button-container">
+            <a href="index.html" class="menu-button" id="back-button">Back to Main Menu</a>
+            <a href="game.html" class="menu-button" id="play-button">Play Game</a>
+            <a href="level.html" class="menu-button" id="levels-button">Level Selection</a>
+        </div>
+    </div>
+
+     <script src="language.js"></script>
+    <script>
+        const languageToggle = document.getElementById('language-toggle');
+        const contentContainer = document.getElementById('content-container');
+        let currentLanguage = 'english';
+        
+        // English content
+        const englishContent = {
+            title: "About Block Game",
+            welcomeText: "Welcome to Block Game, a challenging puzzle game where you navigate through levels by moving blocks and reaching the goal!",
+            featuresTitle: "Game Features",
+            featuresList: [
+                "Multiple challenging levels with increasing difficulty",
+                "Simple controls - move left/right and drop blocks",
+                "Progress saving - your completed levels are saved",
+                "Responsive design - play on desktop or mobile devices",
+                "Engaging sound effects for better gameplay experience"
+            ],
+            howToPlayTitle: "How to Play",
+            howToPlayText: "Use the left and right buttons to move your character. Press the down button to pick up or drop blocks. Your goal is to reach the golden circle in each level by strategically moving blocks to create a path.",
+            aboutDevTitle: "About the Developer",
+            aboutDevText: "This game was created as a fun project to challenge players' problem-solving skills. The developer enjoys creating interactive experiences that are both entertaining and mentally stimulating.",
+            backButton: "Back to Main Menu",
+            playButton: "Play Game",
+            levelsButton: "Level Selection"
+        };
+        
+        // Kurdish content
+        const kurdishContent = {
+            title: "دەربارەی یاری بلۆک",
+            welcomeText: "بەخێربێن بۆ یاری بلۆک، یارییەکی مەتەڵ و چالاکە کە تێیدا بە جوڵاندنی بلۆکەکان و گەیشتن بە ئامانجەکە بە ئاستەکاندا دەڕۆیت!",
+            featuresTitle: "تایبەتمەندیەکانی یارییەکە",
+            featuresList: [
+                "چەندین ئاستی چالاک لەگەڵ زیادبوونی سەختی",
+                "کۆنتڕۆڵە سادەکان - جوڵاندنی چەپ/ڕاست و دابەزاندنی بلۆکەکان",
+                "پاشەکەوتکردنی پێشکەوتن - ئاستە تەواوکراوەکانت پاشەکەوت دەکرێن",
+                "دیزاینی وەڵامدەرەوە - یاریکردن لەسەر ئامێری مێز یان مۆبایل",
+                "کاریگەری دەنگی سەرنجڕاکێش بۆ ئەزموونی باشتری یاریکردن"
+            ],
+            howToPlayTitle: "چۆنیەتی یاریکردن",
+            howToPlayText: "بۆ جوڵاندنی کارەکتەرەکەت دوگمەی چەپ و ڕاست بەکاربهێنە. بۆ هەڵگرتن یان دابەزاندنی بلۆکەکان دوگمەی خوارەوە داگرە. ئامانجت ئەوەیە لە هەر ئاستێکدا بگەیتە بازنەی زێڕین بە جوڵاندنی ستراتیژی بلۆکەکان بۆ دروستکردنی ڕێگایەک.",
+            aboutDevTitle: "دەربارەی گەشەپێدەر",
+            aboutDevText: "ئەم یارییە وەک پڕۆژەیەکی خۆش دروستکراوە بۆ تەحەدای تواناکانی یاریزانان لە چارەسەرکردنی کێشەکان. گەشەپێدەر چێژ لە دروستکردنی ئەزموونی کارلێککارانە وەردەگرێت کە هەم سەرگەرمی و هەم هاندەری دەروونییە.",
+            backButton: "بگەڕێوە بۆ پەڕەی سەرەکی",
+            playButton: "یاری بکە",
+            levelsButton: "هەڵبژاردنی ئاست"
+        };
+        
+        languageToggle.addEventListener('click', () => {
+            if (currentLanguage === 'english') {
+                // Switch to Kurdish
+                currentLanguage = 'kurdish';
+                languageToggle.textContent = "English / ئینگلیزی";
+                contentContainer.classList.add('kurdish');
+                updateContent(kurdishContent);
+            } else {
+                // Switch to English
+                currentLanguage = 'english';
+                languageToggle.textContent = "کوردی / Kurdish";
+                contentContainer.classList.remove('kurdish');
+                updateContent(englishContent);
+            }
+        });
+        
+        function updateContent(content) {
+            document.getElementById('title').textContent = content.title;
+            document.getElementById('welcome-text').textContent = content.welcomeText;
+            document.getElementById('features-title').textContent = content.featuresTitle;
+            
+            const featuresList = document.getElementById('features-list');
+            featuresList.innerHTML = '';
+            content.featuresList.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                featuresList.appendChild(li);
+            });
+            
+            document.getElementById('how-to-play-title').textContent = content.howToPlayTitle;
+            document.getElementById('how-to-play-text').textContent = content.howToPlayText;
+            document.getElementById('about-dev-title').textContent = content.aboutDevTitle;
+            document.getElementById('about-dev-text').textContent = content.aboutDevText;
+            document.getElementById('back-button').textContent = content.backButton;
+            document.getElementById('play-button').textContent = content.playButton;
+            document.getElementById('levels-button').textContent = content.levelsButton;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(testt.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        h2 {
+            margin: 20px 0 10px;
+            color: #4CAF50;
+        }
+
+        h3 {
+            margin: 15px 0 5px;
+            color: #4CAF50;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .features, .level-credits {
+            margin-left: 20px;
+        }
+
+        .features li, .level-credits li {
+            margin-bottom: 8px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .menu-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #45a049;
+        }
+
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .kurdish {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+        }
+
+        .credit-item {
+            display: flex;
+            justify-content: space-between;
+            max-width: 300px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu-button {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .language-toggle {
+                position: static;
+                margin-bottom: 15px;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content-container">
+        <button class="language-toggle" id="language-toggle">کوردی / Kurdish</button>
+        
+        <h1 id="title">About Block Game</h1>
+        
+        <p id="welcome-text">Welcome to Block Game, a challenging puzzle game where you navigate through levels by moving blocks and reaching the goal!</p>
+        
+        <h2 id="features-title">Game Features</h2>
+        <ul class="features" id="features-list">
+            <li>Multiple challenging levels with increasing difficulty</li>
+            <li>Simple controls - move left/right and drop blocks</li>
+            <li>Progress saving - your completed levels are saved</li>
+            <li>Responsive design - play on desktop or mobile devices</li>
+            <li>Engaging sound effects for better gameplay experience</li>
+        </ul>
+        
+        <h2 id="how-to-play-title">How to Play</h2>
+        <p id="how-to-play-text">Use the left and right buttons to move your character. Press the down button to pick up or drop blocks. Your goal is to reach the golden circle in each level by strategically moving blocks to create a path.</p>
+        
+        <h2 id="about-dev-title">About the Developer</h2>
+        <p id="about-dev-text">This game was created as a fun project to challenge players' problem-solving skills. The developer enjoys creating interactive experiences that are both entertaining and mentally stimulating.</p>
+        
+        <h2 id="level-credits-title">Level Credits</h2>
+        <h3 id="designer-title">Level Designers:</h3>
+        <ul class="level-credits" id="level-credits-list">
+            <li class="credit-item"><span>Levels 1-5:</span> <span>Alex Johnson</span></li>
+            <li class="credit-item"><span>Levels 6-10:</span> <span>Sarah Williams</span></li>
+            <li class="credit-item"><span>Levels 11-15:</span> <span>Mohammed Ali</span></li>
+            <li class="credit-item"><span>Bonus Levels:</span> <span>Community Contributors</span></li>
+        </ul>
+        
+        <div class="button-container">
+            <a href="index.html" class="menu-button" id="back-button">Back to Main Menu</a>
+            <a href="game.html" class="menu-button" id="play-button">Play Game</a>
+            <a href="level.html" class="menu-button" id="levels-button">Level Selection</a>
+        </div>
+    </div>
+
+    <script>
+        const languageToggle = document.getElementById('language-toggle');
+        const contentContainer = document.getElementById('content-container');
+        let currentLanguage = 'english';
+        
+        // English content
+        const englishContent = {
+            title: "About Block Game",
+            welcomeText: "Welcome to Block Game, a challenging puzzle game where you navigate through levels by moving blocks and reaching the goal!",
+            featuresTitle: "Game Features",
+            featuresList: [
+                "Multiple challenging levels with increasing difficulty",
+                "Simple controls - move left/right and drop blocks",
+                "Progress saving - your completed levels are saved",
+                "Responsive design - play on desktop or mobile devices",
+                "Engaging sound effects for better gameplay experience"
+            ],
+            howToPlayTitle: "How to Play",
+            howToPlayText: "Use the left and right buttons to move your character. Press the down button to pick up or drop blocks. Your goal is to reach the golden circle in each level by strategically moving blocks to create a path.",
+            aboutDevTitle: "About the Developer",
+            aboutDevText: "This game was created as a fun project to challenge players' problem-solving skills. The developer enjoys creating interactive experiences that are both entertaining and mentally stimulating.",
+            levelCreditsTitle: "Level Credits",
+            designerTitle: "Level Designers:",
+            levelCreditsList: [
+                { range: "Levels 1-5:", name: "Alex Johnson" },
+                { range: "Levels 6-10:", name: "Sarah Williams" },
+                { range: "Levels 11-15:", name: "Mohammed Ali" },
+                { range: "Bonus Levels:", name: "Community Contributors" }
+            ],
+            backButton: "Back to Main Menu",
+            playButton: "Play Game",
+            levelsButton: "Level Selection"
+        };
+        
+        // Kurdish content
+        const kurdishContent = {
+            title: "دەربارەی یاری بلۆک",
+            welcomeText: "بەخێربێن بۆ یاری بلۆک، یارییەکی مەتەڵ و چالاکە کە تێیدا بە جوڵاندنی بلۆکەکان و گەیشتن بە ئامانجەکە بە ئاستەکاندا دەڕۆیت!",
+            featuresTitle: "تایبەتمەندیەکانی یارییەکە",
+            featuresList: [
+                "چەندین ئاستی چالاک لەگەڵ زیادبوونی سەختی",
+                "کۆنتڕۆڵە سادەکان - جوڵاندنی چەپ/ڕاست و دابەزاندنی بلۆکەکان",
+                "پاشەکەوتکردنی پێشکەوتن - ئاستە تەواوکراوەکانت پاشەکەوت دەکرێن",
+                "دیزاینی وەڵامدەرەوە - یاریکردن لەسەر ئامێری مێز یان مۆبایل",
+                "کاریگەری دەنگی سەرنجڕاکێش بۆ ئەزموونی باشتری یاریکردن"
+            ],
+            howToPlayTitle: "چۆنیەتی یاریکردن",
+            howToPlayText: "بۆ جوڵاندنی کارەکتەرەکەت دوگمەی چەپ و ڕاست بەکاربهێنە. بۆ هەڵگرتن یان دابەزاندنی بلۆکەکان دوگمەی خوارەوە داگرە. ئامانجت ئەوەیە لە هەر ئاستێکدا بگەیتە بازنەی زێڕین بە جوڵاندنی ستراتیژی بلۆکەکان بۆ دروستکردنی ڕێگایەک.",
+            aboutDevTitle: "دەربارەی گەشەپێدەر",
+            aboutDevText: "ئەم یارییە وەک پڕۆژەیەکی خۆش دروستکراوە بۆ تەحەدای تواناکانی یاریزانان لە چارەسەرکردنی کێشەکان. گەشەپێدەر چێژ لە دروستکردنی ئەزموونی کارلێککارانە وەردەگرێت کە هەم سەرگەرمی و هەم هاندەری دەروونییە.",
+            levelCreditsTitle: "پاسەوانی ئاستەکان",
+            designerTitle: "دیزاینەری ئاستەکان:",
+            levelCreditsList: [
+                { range: "ئاستەکانی ١-٥:", name: "ئالێکس جۆنسۆن" },
+                { range: "ئاستەکانی ٦-١٠:", name: "سارا ویلیامس" },
+                { range: "ئاستەکانی ١١-١٥:", name: "محەممەد عەلی" },
+                { range: "ئاستەکانی زیادی:", name: "بەشدارانی کۆمەڵگا" }
+            ],
+            backButton: "بگەڕێوە بۆ پەڕەی سەرەکی",
+            playButton: "یاری بکە",
+            levelsButton: "هەڵبژاردنی ئاست"
+        };
+        
+        languageToggle.addEventListener('click', () => {
+            if (currentLanguage === 'english') {
+                // Switch to Kurdish
+                currentLanguage = 'kurdish';
+                languageToggle.textContent = "English / ئینگلیزی";
+                contentContainer.classList.add('kurdish');
+                updateContent(kurdishContent);
+            } else {
+                // Switch to English
+                currentLanguage = 'english';
+                languageToggle.textContent = "کوردی / Kurdish";
+                contentContainer.classList.remove('kurdish');
+                updateContent(englishContent);
+            }
+        });
+        
+        function updateContent(content) {
+            document.getElementById('title').textContent = content.title;
+            document.getElementById('welcome-text').textContent = content.welcomeText;
+            document.getElementById('features-title').textContent = content.featuresTitle;
+            
+            const featuresList = document.getElementById('features-list');
+            featuresList.innerHTML = '';
+            content.featuresList.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                featuresList.appendChild(li);
+            });
+            
+            document.getElementById('how-to-play-title').textContent = content.howToPlayTitle;
+            document.getElementById('how-to-play-text').textContent = content.howToPlayText;
+            document.getElementById('about-dev-title').textContent = content.aboutDevTitle;
+            document.getElementById('about-dev-text').textContent = content.aboutDevText;
+            
+            // Update level credits section
+            document.getElementById('level-credits-title').textContent = content.levelCreditsTitle;
+            document.getElementById('designer-title').textContent = content.designerTitle;
+            
+            const levelCreditsList = document.getElementById('level-credits-list');
+            levelCreditsList.innerHTML = '';
+            content.levelCreditsList.forEach(credit => {
+                const li = document.createElement('li');
+                li.className = 'credit-item';
+                li.innerHTML = `<span>${credit.range}</span> <span>${credit.name}</span>`;
+                levelCreditsList.appendChild(li);
+            });
+            
+            document.getElementById('back-button').textContent = content.backButton;
+            document.getElementById('play-button').textContent = content.playButton;
+            document.getElementById('levels-button').textContent = content.levelsButton;
+        }
+    </script>
+</body>
+</html>
+
+
+
+-->
+
