@@ -1,206 +1,241 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
-  <title> yary kura haraka </title>
+  <title>Yary Kura Haraka</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
+    /* Your original CSS with additions for visual enhancements */
+    html {
+      touch-action: manipulation;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
 
-  body {
-    background-image: url(testt.jpg);
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: Arial, sans-serif;
-    gap: 5px;
-    padding: 10px; /* Add some padding for mobile */
-    /* margin: 30px; */
-    box-sizing: border-box; /* Ensure padding doesn't cause overflow */
-    margin: 30px;
-  }
-
-  .text {
-    background-color: rgba(6, 2, 10, 0);
-    direction: rtl;
-    
-    unicode-bidi: bidi-override;
-    margin-top: 5px; /* Smaller margin for mobile */
-    text-align: center;
-    font-size: 15px; /* Smaller font size for mobile */
-  }
-
-  canvas {
-    border: none;
-    margin-bottom: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
-    background-color: rgba(0, 0, 0, 0);
-    border-radius: 8px;
-    max-width: 90vw; /* Make canvas responsive */
-    height: auto; /* Maintain aspect ratio */
-  }
-
-  .game-controls-container {
-    display: flex;
-    justify-content: space-around;
-    align-content: stretch;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-items: center;
-    width: 100%; /* Full width for controls */
-  }
-
-  .top-controls, .bottom-controls, .level-selection, .control-buttons, .level-menu {
-    display: flex;
-    gap: 3px;
-    justify-content: center;
-    flex-wrap: wrap;
-    background-color: rgb(25, 51, 26,0.4);
-    color: white;
-    border: none;
-    padding: 8px; /* Reduced padding for mobile */
-    font-size: 10px; /* Reduced font size for mobile */
-    border-radius: 4px;
-    cursor: pointer;
-    min-width: 30px; /* Reduced min-width */
-  }
-  .level-selection{
-    display: none;
-  }
-
-  button, select {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 8px;
-    font-size: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    min-width: 40px;
-  }
-
-  /* Specific styles for control buttons to make them larger and more mobile-friendly */
-  .control-buttons button {
-    padding: 15px 20px; /* Larger buttons for easier tapping */
-    font-size: 18px;
-  }
-
-  button:hover {
-    background-color: #45a049;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  }
-
-  button:active {
-    transform: scale(0.95);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  }
-
-  select {
-    padding: 4px 6px;
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
-  }
-
-  select:focus {
-    outline: none;
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 1px rgba(76, 175, 80, 0.3);
-  }
-
-  #levelDisplay {
-    background-color: #45a049;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    font-size: 12px;
-    padding: 5px;
-    border-radius: 3px;
-  }
-
-  label {
-    font-size: 12px;
-  }
-
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1001;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    /* background-color: rgba(0,0,0,0.4); */
-    justify-content: center;
-    align-items: center;
-  }
-
-  .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 90%; /* Larger width for better mobile view */
-    max-width: 300px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  }
-
-  .modal-content h2 {
-    margin-top: 0;
-    color: #333;
-  }
-
-  .modal-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
-  }
-
-  .modal-buttons button {
-    width: 100%;
-    padding: 10px 15px;
-    font-size: 16px;
-  }
-
-  /* Media Query for smaller screens (e.g., phones) */
-  @media (max-width: 600px) {
-    .game-controls-container {
+    body {
+      background-image: url(testt.jpg);
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
       flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      gap: 5px;
+      padding: 10px;
+      box-sizing: border-box;
+      margin: 30px;
     }
 
-    .top-controls, .level-menu {
-      width: 100%;
-      justify-content: center;
-    }
-    
-    .control-buttons {
-      width: 100%;
-      justify-content:center;
+    .text {
+      background-color: rgba(6, 2, 10, 0);
+      direction: rtl;
+      unicode-bidi: bidi-override;
+      margin-top: 5px;
+      text-align: center;
+      font-size: 15px;
     }
 
     canvas {
-      max-width: 95vw;
-      max-height: 50vh;
+      border: none;
+      margin-bottom: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 0);
+      border-radius: 8px;
+      max-width: 90vw;
+      height: auto;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: -webkit-crisp-edges;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      filter: 
+        drop-shadow(0 2px 4px rgba(0,0,0,0.2))
+        brightness(1.05)
+        contrast(1.1);
     }
-  }
 
+    .game-controls-container {
+      display: flex;
+      justify-content: space-around;
+      align-content: stretch;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+    }
+
+    .top-controls, .bottom-controls, .level-selection, .control-buttons, .level-menu {
+      display: flex;
+      gap: 3px;
+      justify-content: center;
+      flex-wrap: wrap;
+      background-color: rgb(25, 51, 26,0.4);
+      color: white;
+      border: none;
+      padding: 8px;
+      font-size: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      min-width: 30px;
+    }
+    
+    .level-selection {
+      display: none;
+    }
+
+    button, select {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 5px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      min-width: 40px;
+    }
+
+    .control-buttons button {
+      padding: 15px 20px;
+      font-size: 18px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active {
+      transform: scale(0.95);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    select {
+      padding: 4px 6px;
+      background-color: #f0f0f0;
+      color: #333;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #4CAF50;
+      box-shadow: 0 0 0 1px rgba(76, 175, 80, 0.3);
+    }
+
+    #levelDisplay {
+      background-color: #45a049;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      font-size: 12px;
+      padding: 5px;
+      border-radius: 3px;
+    }
+
+    label {
+      font-size: 12px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 300px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .modal-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .modal-buttons button {
+      width: 100%;
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+
+    /* Visual enhancement styles */
+    .confetti-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    
+    @keyframes pulse {
+      from { opacity: 0.6; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1.05); }
+    }
+    
+    @keyframes shake {
+      10%, 90% { transform: translateX(-1px); }
+      20%, 80% { transform: translateX(2px); }
+      30%, 50%, 70% { transform: translateX(-3px); }
+      40%, 60% { transform: translateX(3px); }
+    }
+    
+    .stats-display {
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin: 5px;
+    }
+
+    @media (max-width: 600px) {
+      .game-controls-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .top-controls, .level-menu {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .control-buttons {
+        width: 100%;
+        justify-content:center;
+      }
+
+      canvas {
+        max-width: 95vw;
+        max-height: 50vh;
+      }
+    }
   </style>
 </head>
 <body>
@@ -209,14 +244,14 @@
   <audio id="run" src="rt.mp3" preload="auto"></audio>
   <audio id="fix" src="Boye nabet.mp3" preload="auto"></audio>
 
-
   <div class="game-controls-container">
     <div class="top-controls">
       <div id="levelDisplay"><b>Level:</b> 1</div>
+      <div class="stats-display" id="moveCounter">Moves: 0</div>
       <button onclick="restartLevel()">🔁 Restart</button>
       <button onclick="window.location.href='index.html'">🏠 Menu</button>
-      <button onclick="window.location.href='level.html'"> Level </button>
-
+      <button onclick="window.location.href='level.html'">Level</button>
+      <button onclick="undoMove()">↩️ Undo</button>
     </div>
 
     <div class="level-selection">
@@ -227,7 +262,6 @@
         <option value="2">L3</option>
         <option value="3">L4</option>
         <option value="4">L5</option>
-        
       </select>
     </div>
   </div>
@@ -242,38 +276,60 @@
 
   <div class="level-menu">
     <div class="text">
-    <div><b>کۆنتڕۆڵەکان</b></div>
-    <div><b>تیری چەپ / ڕاست:</b>جوڵەی چەپ / ڕاست</div>
-    <div><b>تیری خوارەوە:</b> بلۆک هەڵگرتن یان دابەزاندن</div>
+      <div><b>کۆنتڕۆڵەکان</b></div>
+      <div><b>تیری چەپ / ڕاست:</b>جوڵەی چەپ / ڕاست</div>
+      <div><b>تیری خوارەوە:</b> بلۆک هەڵگرتن یان دابەزاندن</div>
+    </div>
   </div>
-  </div>
-  
 
   <div id="levelCompletionModal" class="modal">
     <div class="modal-content">
       <h2>🎉 Level Complete!</h2>
+      <div id="completionStats">Moves: 0</div>
       <div class="modal-buttons">
         <button onclick="nextLevel()">Next Level ➡️</button>
-        <button onclick="yakamrestartLevel()"> restart Level 🔁</button>
-        <button onclick="window.location.href='index.html'"> Go to Menu 🏠</button>
+        <button onclick="yakamrestartLevel()">Restart Level 🔁</button>
+        <button onclick="window.location.href='index.html'">Go to Menu 🏠</button>
       </div>
     </div>
   </div>
 
 <script>
-
+// Your original game variables with enhancements
 const canvas = document.getElementById('game');
-const context = canvas.getContext('2d');
-
+const context = canvas.getContext('2d', { willReadFrequently: true });
 let grid = 32;
-
-// --- Wall Canvas for pre-rendering complex wall texture ---
 const wallCanvas = document.createElement('canvas');
 const wallCtx = wallCanvas.getContext('2d');
 wallCanvas.width = wallCanvas.height = grid;
 
-// --- Wall Design (More detailed bricks) ---
+// Enhanced game state tracking
+let gameState = {
+  moves: 0,
+  time: 0,
+  history: [],
+  isAnimating: false,
+  startTime: Date.now(),
+  shakeIntensity: 0
+};
+
+// Animation tracking
+const animations = {
+  blocks: {},
+  player: null
+};
+
+// Visual effects
+let particles = [];
+let screenShake = 0;
+
+// Your original drawWall function with pixel-perfect enhancement
 function drawWall(ctx, x, y, size) {
+    // Round coordinates for crisp pixels
+    x = Math.round(x);
+    y = Math.round(y);
+    size = Math.round(size);
+    
     const brickColor1 = '#8B4513';
     const brickColor2 = '#A0522D';
     const mortarColor = '#A9A9A9';
@@ -310,7 +366,7 @@ function drawWall(ctx, x, y, size) {
 
 drawWall(wallCtx, 0, 0, grid);
 
-
+// Your original game variables
 let playerDir = { row: 0, col: 0 };
 let playerPos = { row: 0, col: 0 };
 let playerFacing = -1;
@@ -326,7 +382,11 @@ const types = {
   empty: ' '
 };
 
+// Your original levels array remains unchanged
 const levels = [
+   
+
+
     `
    #    ##        ##
    #                #
@@ -349,18 +409,20 @@ const levels = [
    #####################
       
   `.trim(),
-  `
-   #    ##        ##
-   #                #
-  ##                 #
-  #.                  #
-  ##                   #
-   #           #  $    #
-   #           #$ $$@  #
-   #####   #############
-       #  $#
-       #####
-  `.trim(),
+
+
+ `
+  #    ##        ##
+  #                #
+ ##                 #
+#.                   #
+###                   #
+  #           #  $    #
+  #           #$ $$@  #
+  #####   #############
+      #  $#
+      #####
+`.trim(),
 
   `
    #              #
@@ -393,6 +455,7 @@ const levels = [
 let currentLevel = 0;
 let cells = [];
 
+// Enhanced loadLevel function
 function loadLevel(levelIndex) {
   const level = levels[levelIndex];
   width = 0;
@@ -408,23 +471,22 @@ function loadLevel(levelIndex) {
           playerPos = { row, col };
         }
       });
+      localStorage.setItem('completedLevel', Math.max(currentLevel, parseInt(localStorage.getItem('completedLevel')) || 0));
     });
 
   document.getElementById("levelDisplay").innerText = "Level: " + (levelIndex + 1);
   document.getElementById("levelSelect").value = levelIndex;
   playerDir = { row: 0, col: 0 };
   width = Math.max(width, 12);
-  carryingBlock = false; // Reset carrying block status
-  resizeCanvas(); // Resize canvas when level loads
-
-  const nextLevelButton = document.getElementById("nextLevelButton");
-  if (nextLevelButton) {
-      nextLevelButton.disabled = true;
-      nextLevelButton.style.backgroundColor = '#cccccc';
-      nextLevelButton.style.cursor = 'not-allowed';
-  }
+  carryingBlock = false;
+  gameState.moves = 0;
+  gameState.history = [];
+  gameState.startTime = Date.now();
+  updateStats();
+  resizeCanvas();
 }
 
+// Your original getUrlParameter function remains unchanged
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
@@ -432,6 +494,7 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
+// Initialize level from URL parameter
 const urlLevel = getUrlParameter('level');
 if (urlLevel !== '') {
     const parsedLevel = parseInt(urlLevel);
@@ -444,6 +507,7 @@ if (urlLevel !== '') {
 
 loadLevel(currentLevel);
 
+// Enhanced movement functions with visual feedback
 function moveLeft() {
   playerDir = { row: 0, col: -1 };
   playSoundById("block");
@@ -464,6 +528,8 @@ function moveDown() {
     cells[playerPos.row - 1][playerPos.col] = types.block;
     carryingBlock = true;
     playSoundById("block");
+    // Visual feedback for picking up block
+    gameState.shakeIntensity = 2;
   } else if (carryingBlock) {
     let row = playerPos.row;
     let finalDropRow = row;
@@ -482,10 +548,13 @@ function moveDown() {
         finalDropRow = playerPos.row - 1;
       } else {
         playSoundById("fix");
+        // Visual feedback for failed action
+        gameState.shakeIntensity = 3;
         return;
       }
     } else {
         playSoundById("fix");
+        gameState.shakeIntensity = 3;
         return;
     }
 
@@ -493,22 +562,416 @@ function moveDown() {
     cells[finalDropRow][nextCol] = types.block;
     carryingBlock = false;
     playSoundById("block");
+    // Visual feedback for dropping block
+    gameState.shakeIntensity = 5;
   }
 
   requestAnimationFrame(loop);
 }
 
-function onLevelComplete(currentLevel) {
-    const highestCompleted = parseInt(localStorage.getItem('completedLevel')) || 0;
+// New visual effect functions
+function createConfetti(x, y) {
+  const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+  const particleCount = 100;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'confetti-particle';
+    document.body.appendChild(particle);
     
-    if (currentLevel > highestCompleted) {
-        localStorage.setItem('completedLevel', currentLevel);
-        console.log(`Level ${currentLevel} completed and progress saved!`);
+    const size = Math.random() * 12 + 6;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 8 + 4;
+    const rotationSpeed = (Math.random() - 0.5) * 20;
+    const lifetime = Math.random() * 1500 + 1000;
+    
+    particle.style.cssText = `
+      position: fixed;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${color};
+      left: ${x}px;
+      top: ${y}px;
+      border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+      pointer-events: none;
+      z-index: 1000;
+      transform-origin: center;
+    `;
+    
+    const startTime = Date.now();
+    
+    function update() {
+      const elapsed = Date.now() - startTime;
+      const progress = elapsed / lifetime;
+      
+      if (progress >= 1) {
+        particle.remove();
+        return;
+      }
+      
+      const currentX = x + Math.cos(angle) * velocity * elapsed * 0.2;
+      const currentY = y + Math.sin(angle) * velocity * elapsed * 0.2 + (elapsed * 0.001 * 9.8 * elapsed * 0.001);
+      const rotation = rotationSpeed * elapsed * 0.001;
+      const scale = 1 - progress;
+      const opacity = 1 - (progress * progress);
+      
+      particle.style.transform = `translate(${currentX - x}px, ${currentY - y}px) rotate(${rotation}deg) scale(${scale})`;
+      particle.style.opacity = opacity;
+      
+      requestAnimationFrame(update);
     }
     
-    window.location.href = 'level.html';
+    update();
+  }
 }
 
+function updateStats() {
+  document.getElementById("moveCounter").textContent = `Moves: ${gameState.moves}`;
+  const elapsed = Math.floor((Date.now() - gameState.startTime) / 1000);
+  document.getElementById("completionStats").textContent = `Moves: ${gameState.moves} | Time: ${elapsed}s`;
+}
+
+function undoMove() {
+  if (gameState.history.length > 0 && !gameState.isAnimating) {
+    const prevState = gameState.history.pop();
+    cells = prevState.cells.map(row => [...row]);
+    playerPos = {...prevState.playerPos};
+    carryingBlock = prevState.carryingBlock;
+    gameState.moves--;
+    updateStats();
+    requestAnimationFrame(loop);
+    playSoundById("block");
+  }
+}
+
+// Enhanced move function with history tracking
+function move(startPos, endPos) {
+  gameState.history.push(JSON.parse(JSON.stringify({
+    cells: cells.map(row => [...row]),
+    playerPos: {...playerPos},
+    carryingBlock
+  })));
+
+  if (gameState.history.length > 50) {
+    gameState.history.shift();
+  }
+
+  const startCell = cells[startPos.row][startPos.col];
+  const isPlayer = startCell === types.player;
+
+  switch(startCell) {
+    case types.player:
+    case types.block:
+      cells[startPos.row][startPos.col] = types.empty;
+      break;
+  }
+
+  const endCellContent = cells[endPos.row][endPos.col];
+
+  switch(endCellContent) {
+    case types.empty:
+      cells[endPos.row][endPos.col] = isPlayer ? types.player : types.block;
+      break;
+    case types.goal:
+        cells[endPos.row][endPos.col] = isPlayer ? types.player : types.block;
+        break;
+  }
+
+  playerFacing = endPos.col - startPos.col;
+  gameState.moves++;
+  updateStats();
+
+  if (carryingBlock) {
+    cells[startPos.row - 1][startPos.col] = types.empty;
+    cells[endPos.row - 1][endPos.col] = types.block;
+  }
+}
+
+// Your original playSoundById function remains unchanged
+function playSoundById(id) {
+  const sound = document.getElementById(id);
+  if (sound) {
+    sound.currentTime = 0;
+    sound.play().catch(() => {});
+  }
+}
+
+// Enhanced resizeCanvas function with pixel scaling
+function resizeCanvas() {
+  const gameContainer = document.querySelector('body');
+  const availableWidth = gameContainer.clientWidth - 20;
+  const availableHeight = gameContainer.clientHeight - 
+    (document.querySelector('.game-controls-container').clientHeight + 
+     document.querySelector('.control-buttons').clientHeight + 40);
+
+  const maxCellsX = 12;
+  const maxCellsY = 8;
+
+  // Calculate base grid size
+  let baseGrid = Math.min(
+    Math.floor(availableWidth / maxCellsX),
+    Math.floor(availableHeight / maxCellsY)
+  );
+  baseGrid = Math.max(baseGrid, 16);
+
+  // Apply pixel scaling
+  const PIXEL_SCALE = window.devicePixelRatio > 1 ? 2 : 1;
+  grid = baseGrid * PIXEL_SCALE;
+  
+  // Set canvas size
+  canvas.style.width = `${baseGrid * Math.min(width, maxCellsX)}px`;
+  canvas.style.height = `${baseGrid * Math.min(cells.length, maxCellsY)}px`;
+  canvas.width = grid * Math.min(width, maxCellsX);
+  canvas.height = grid * Math.min(cells.length, maxCellsY);
+
+  // Configure context for crisp pixels
+  context.imageSmoothingEnabled = false;
+  
+  // Redraw wall texture at new size
+  wallCanvas.width = wallCanvas.height = grid;
+  drawWall(wallCtx, 0, 0, grid);
+}
+
+// Enhanced loop function with visual effects
+function loop() {
+  rAF = requestAnimationFrame(loop);
+  
+  // Apply screen shake if needed
+  const shakeOffset = gameState.shakeIntensity > 0 ? 
+    (Math.random() - 0.5) * gameState.shakeIntensity : 0;
+  gameState.shakeIntensity = Math.max(0, gameState.shakeIntensity - 0.5);
+  
+  context.save();
+  context.translate(shakeOffset, 0);
+  
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  let row = playerPos.row + playerDir.row;
+  const col = playerPos.col + playerDir.col;
+  const cell = cells[row] ? cells[row][col] : undefined;
+
+  if (cell !== undefined) {
+    switch(cell) {
+      case types.empty:
+      case types.goal:
+        let rowBelow = row + 1 + playerDir.row;
+        let belowCell = cells[rowBelow] ? cells[rowBelow][col] : undefined;
+        while (belowCell === types.empty || belowCell === types.goal) {
+          row = rowBelow;
+          rowBelow = row + 1 + playerDir.row;
+          belowCell = cells[rowBelow] ? cells[rowBelow][col] : undefined;
+          if (rowBelow >= cells.length || belowCell === undefined) break;
+        }
+
+        move(playerPos, { row, col });
+
+        playerPos.row = row;
+        playerPos.col = col;
+
+        if (cell === types.goal) {
+          playSoundById("goalSound");
+          cancelAnimationFrame(rAF);
+          document.getElementById('levelCompletionModal').style.display = 'flex';
+          createConfetti(
+            canvas.offsetLeft + playerPos.col * (grid / (window.devicePixelRatio > 1 ? 2 : 1)) + (grid / (window.devicePixelRatio > 1 ? 4 : 2)),
+            canvas.offsetTop + playerPos.row * (grid / (window.devicePixelRatio > 1 ? 2 : 1)) + (grid / (window.devicePixelRatio > 1 ? 4 : 2))
+          );
+          updateStats();
+        }
+        break;
+
+      case types.block:
+      case types.wall:
+        const rowAbove = row - 1 + playerDir.row;
+        const nextCell = cells[rowAbove] ? cells[rowAbove][col] : undefined;
+
+        if (nextCell === types.empty || nextCell === types.goal) {
+          move(playerPos, { row: rowAbove, col });
+
+          playerPos.row = rowAbove;
+          playerPos.col = col;
+        }
+        break;
+    }
+  }
+
+  playerDir = { row: 0, col: 0 };
+
+  context.strokeStyle = 'black';
+  context.fillStyle = 'black';
+  context.lineWidth = 2;
+
+  const startRow = clamp(0, cells.length - Math.min(cells.length, 8), playerPos.row - 4);
+  const startCol = clamp(0, width - Math.min(width, 12), playerPos.col - 6);
+
+  for (let row = startRow; row < cells.length; row++) {
+    for (let col = startCol; col < cells[row].length; col++) {
+      const cell = cells[row][col];
+      const drawRow = row - startRow;
+      const drawCol = col - startCol;
+
+      switch(cell) {
+        case types.wall:
+          context.drawImage(wallCanvas, drawCol * grid, drawRow * grid);
+          break;
+
+        case types.block:
+          context.save();
+          context.translate(drawCol * grid, drawRow * grid);
+          
+          // Block shadow
+          context.fillStyle = 'rgba(0,0,0,0.2)';
+          context.fillRect(2, 4, grid, grid);
+          
+          // Block itself
+          context.fillStyle = '#8B4513';
+          context.fillRect(0, 0, grid, grid);
+          
+          // Block details
+          let gradient = context.createLinearGradient(0, 0, grid, grid);
+          gradient.addColorStop(0, 'rgba(255,255,255,0.2)');
+          gradient.addColorStop(1, 'rgba(0,0,0,0.2)');
+          context.fillStyle = gradient;
+          context.fillRect(0, 0, grid, grid);
+          context.strokeStyle = '#5A2D0C';
+          context.lineWidth = 2;
+          context.strokeRect(1, 1, grid - 2, grid - 2);
+          context.restore();
+          break;
+
+        case types.goal:
+          context.save();
+          context.translate((drawCol + 0.5) * grid, (drawRow + 0.5) * grid);
+          
+          // Pulsing effect
+          const pulse = Math.sin(Date.now() * 0.005) * 0.1 + 1;
+          context.scale(pulse, pulse);
+          
+          context.beginPath();
+          context.arc(0, 0, grid * 0.45, 0, Math.PI * 2);
+          context.fillStyle = '#FFD700';
+          context.fill();
+          context.strokeStyle = '#DAA520';
+          context.lineWidth = 2;
+          context.stroke();
+          
+          // Star pattern
+          context.beginPath();
+          const spikes = 5;
+          const outerRadius = grid * 0.3;
+          const innerRadius = grid * 0.15;
+          for (let i = 0; i < spikes; i++) {
+              let angle = (i * Math.PI * 2 / spikes) - (Math.PI / 2);
+              context.lineTo(Math.cos(angle) * outerRadius, Math.sin(angle) * outerRadius);
+              angle += Math.PI / spikes;
+              context.lineTo(Math.cos(angle) * innerRadius, Math.sin(angle) * innerRadius);
+          }
+          context.closePath();
+          context.fillStyle = '#FFFFFF';
+          context.fill();
+          context.strokeStyle = '#8B0000';
+          context.lineWidth = 1;
+          context.stroke();
+          context.restore();
+          break;
+
+        case types.player:
+          context.save();
+          context.translate((drawCol + 0.5) * grid, (drawRow + 0.5) * grid);
+          
+          // Carrying block indicator
+          if (carryingBlock) {
+            context.save();
+            context.translate(0, -grid * 0.4);
+            
+            // Block shadow
+            context.fillStyle = 'rgba(0,0,0,0.2)';
+            context.beginPath();
+            context.arc(0, grid * 0.1, grid * 0.2, 0, Math.PI * 2);
+            context.fill();
+            
+            // Carried block
+            context.fillStyle = '#8B4513';
+            context.fillRect(-grid * 0.15, -grid * 0.15, grid * 0.3, grid * 0.3);
+            
+            // Block details
+            context.strokeStyle = '#5A2D0C';
+            context.lineWidth = 1;
+            context.strokeRect(-grid * 0.15, -grid * 0.15, grid * 0.3, grid * 0.3);
+            
+            // Rope effect
+            context.strokeStyle = '#654321';
+            context.lineWidth = 1;
+            context.beginPath();
+            context.moveTo(0, -grid * 0.15);
+            context.lineTo(0, grid * 0.15);
+            context.stroke();
+            
+            context.restore();
+          }
+          
+          // Player body
+          context.fillStyle = '#007BFF';
+          context.fillRect(-grid * 0.15, -grid * 0.3, grid * 0.3, grid * 0.5);
+          
+          // Player head
+          context.beginPath();
+          context.arc(0, -grid * 0.45, grid * 0.18, 0, Math.PI * 2);
+          context.fillStyle = '#FFDAB9';
+          context.fill();
+          context.strokeStyle = '#333';
+          context.lineWidth = 1;
+          context.stroke();
+          
+          // Eyes
+          context.fillStyle = 'black';
+          const eyeOffset = playerFacing * grid * 0.05;
+          context.beginPath();
+          context.arc(eyeOffset - grid * 0.05, -grid * 0.5, 1.5, 0, Math.PI * 2);
+          context.arc(eyeOffset + grid * 0.05, -grid * 0.5, 1.5, 0, Math.PI * 2);
+          context.fill();
+          
+          // Mouth
+          context.beginPath();
+          context.arc(0, -grid * 0.55, grid * 0.2, Math.PI, Math.PI * 2);
+          context.lineTo(grid * 0.2, -grid * 0.55);
+          context.lineTo(grid * 0.25, -grid * 0.5);
+          context.lineTo(-grid * 0.25, -grid * 0.5);
+          context.lineTo(-grid * 0.2, -grid * 0.55);
+          context.closePath();
+          context.fillStyle = '#FF4500';
+          context.fill();
+          context.strokeStyle = '#CD3700';
+          context.lineWidth = 1;
+          context.stroke();
+          
+          // Arms and legs
+          context.strokeStyle = '#007BFF';
+          context.lineWidth = 3;
+          context.beginPath();
+          context.moveTo(-grid * 0.15, -grid * 0.2);
+          context.lineTo(-grid * 0.35, -grid * 0.1);
+          context.moveTo(grid * 0.15, -grid * 0.2);
+          context.lineTo(grid * 0.35, -grid * 0.1);
+          context.stroke();
+          context.beginPath();
+          context.moveTo(-grid * 0.1, grid * 0.1);
+          context.lineTo(-grid * 0.15, grid * 0.45);
+          context.moveTo(grid * 0.1, grid * 0.1);
+          context.lineTo(grid * 0.15, grid * 0.45);
+          context.stroke();
+          
+          context.restore();
+          break;
+      }
+    }
+  }
+  
+  context.restore(); // Restore from screen shake
+}
+
+// Your original utility functions
 function clamp(min, max, value) {
   return Math.min(Math.max(min, value), max);
 }
@@ -522,13 +985,13 @@ function restartLevel() {
   playSoundById("run");
   document.getElementById('levelCompletionModal').style.display = 'none';
 }
+
 function yakamrestartLevel() {
   carryingBlock = false;
   loadLevel(currentLevel);
   playerDir = { row: 0, col: 0 };
   cancelAnimationFrame(rAF);
   requestAnimationFrame(loop);
-  // playSoundById("run");
   document.getElementById('levelCompletionModal').style.display = 'none';
 }
 
@@ -576,9 +1039,857 @@ function showMessage(text, duration = 10000) {
   }, duration);
 }
 
-function move(startPos, endPos) {
-  const startCell = cells[startPos.row][startPos.col];
+// Enhanced touch controls
+let touchStartX = 0;
+let touchStartY = 0;
 
+canvas.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, {passive: false});
+
+canvas.addEventListener('touchend', (e) => {
+  e.preventDefault();
+  const touchEndX = e.changedTouches[0].clientX;
+  const touchEndY = e.changedTouches[0].clientY;
+  
+  const dx = touchEndX - touchStartX;
+  const dy = touchEndY - touchStartY;
+  
+  if (Math.abs(dx) > Math.abs(dy)) {
+    if (dx > 0) moveRight();
+    else moveLeft();
+  } else {
+    if (dy > 0) moveDown();
+  }
+}, {passive: false});
+
+// Your original keyboard controls with undo added
+document.addEventListener('keydown', function(e) {
+  playerDir = { row: 0, col: 0};
+  if (e.which === 37) {
+    playerDir.col = -1;
+    playSoundById("block");
+  } else if (e.which === 39) {
+    playerDir.col = 1;
+    playSoundById("block");
+  } else if (e.which === 40) {
+    moveDown();
+    e.preventDefault();
+  } else if (e.which === 90 && e.ctrlKey) { // Ctrl+Z for undo
+    undoMove();
+    e.preventDefault();
+  }
+});
+
+// Initialize the game
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Yary Kura Haraka</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Your original CSS */
+    html {
+      touch-action: manipulation;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background-image: url(testt.jpg);
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      gap: 5px;
+      padding: 10px;
+      box-sizing: border-box;
+      margin: 30px;
+    }
+
+    .text {
+      background-color: rgba(6, 2, 10, 0);
+      direction: rtl;
+      unicode-bidi: bidi-override;
+      margin-top: 5px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    canvas {
+      border: none;
+      margin-bottom: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 0);
+      border-radius: 8px;
+      max-width: 90vw;
+      height: auto;
+      /* Enhanced pixel art rendering */
+      image-rendering: -moz-crisp-edges;
+      image-rendering: -webkit-crisp-edges;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      /* Visual polish */
+      filter: 
+        drop-shadow(0 2px 4px rgba(0,0,0,0.2))
+        brightness(1.05)
+        contrast(1.1);
+    }
+
+    /* Rest of your original CSS classes... */
+/* Your original CSS with additions for visual enhancements */
+    html {
+      touch-action: manipulation;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background-image: url(testt.jpg);
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      gap: 5px;
+      padding: 10px;
+      box-sizing: border-box;
+      margin: 30px;
+    }
+
+    .text {
+      background-color: rgba(6, 2, 10, 0);
+      direction: rtl;
+      unicode-bidi: bidi-override;
+      margin-top: 5px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    canvas {
+      border: none;
+      margin-bottom: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 0);
+      border-radius: 8px;
+      max-width: 90vw;
+      height: auto;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: -webkit-crisp-edges;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      filter: 
+        drop-shadow(0 2px 4px rgba(0,0,0,0.2))
+        brightness(1.05)
+        contrast(1.1);
+    }
+
+    .game-controls-container {
+      display: flex;
+      justify-content: space-around;
+      align-content: stretch;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+    }
+
+    .top-controls, .bottom-controls, .level-selection, .control-buttons, .level-menu {
+      display: flex;
+      gap: 3px;
+      justify-content: center;
+      flex-wrap: wrap;
+      background-color: rgb(25, 51, 26,0.4);
+      color: white;
+      border: none;
+      padding: 8px;
+      font-size: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      min-width: 30px;
+    }
+    
+    .level-selection {
+      display: none;
+    }
+
+    button, select {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 5px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      min-width: 40px;
+    }
+
+    .control-buttons button {
+      padding: 15px 20px;
+      font-size: 18px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active {
+      transform: scale(0.95);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    select {
+      padding: 4px 6px;
+      background-color: #f0f0f0;
+      color: #333;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #4CAF50;
+      box-shadow: 0 0 0 1px rgba(76, 175, 80, 0.3);
+    }
+
+    #levelDisplay {
+      background-color: #45a049;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      font-size: 12px;
+      padding: 5px;
+      border-radius: 3px;
+    }
+
+    label {
+      font-size: 12px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 300px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .modal-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .modal-buttons button {
+      width: 100%;
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+
+    /* Visual enhancement styles */
+    .confetti-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    
+    @keyframes pulse {
+      from { opacity: 0.6; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1.05); }
+    }
+    
+    @keyframes shake {
+      10%, 90% { transform: translateX(-1px); }
+      20%, 80% { transform: translateX(2px); }
+      30%, 50%, 70% { transform: translateX(-3px); }
+      40%, 60% { transform: translateX(3px); }
+    }
+    
+    .stats-display {
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin: 5px;
+    }
+
+    @media (max-width: 600px) {
+      .game-controls-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .top-controls, .level-menu {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .control-buttons {
+        width: 100%;
+        justify-content:center;
+      }
+
+      canvas {
+        max-width: 95vw;
+        max-height: 50vh;
+      }
+    }
+    /* New visual enhancement styles */
+    .confetti-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1000;
+      will-change: transform, opacity;
+    }
+    
+    .stats-display {
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin: 5px;
+    }
+
+    /* Your original media queries... */
+  </style>
+</head>
+<body>
+  <!-- Your original audio elements -->
+  <audio id="goalSound" src="Aye Dast xosh .mp3" preload="auto"></audio>
+  <audio id="block" src="block.wav" preload="auto"></audio>
+  <audio id="run" src="rt.mp3" preload="auto"></audio>
+  <audio id="fix" src="Boye nabet.mp3" preload="auto"></audio>
+
+  <!-- Your original HTML structure -->
+  <div class="game-controls-container">
+    <div class="top-controls">
+      <div id="levelDisplay"><b>Level:</b> 1</div>
+      <!-- Added move counter -->
+      <div class="stats-display" id="moveCounter">Moves: 0</div>
+      <button onclick="restartLevel()">🔁 Restart</button>
+      <button onclick="window.location.href='index.html'">🏠 Menu</button>
+      <button onclick="window.location.href='level.html'">Level</button>
+      <!-- Added undo button -->
+      <button onclick="undoMove()">↩️ Undo</button>
+    </div>
+
+    <div class="level-selection">
+      <label for="levelSelect"><b>Select:</b></label>
+      <select id="levelSelect" onchange="selectLevel(this.value)">
+        <option value="0">L1</option>
+        <option value="1">L2</option>
+        <option value="2">L3</option>
+        <option value="3">L4</option>
+        <option value="4">L5</option>
+      </select>
+    </div>
+  </div>
+
+  <canvas width="500" height="350" id="game"></canvas>
+
+  <div class="control-buttons">
+    <button onclick="moveLeft()">⬅️</button>
+    <button onclick="moveDown()">⬇️</button>
+    <button onclick="moveRight()">➡️</button>
+  </div>
+
+  <div class="level-menu">
+    <div class="text">
+      <div><b>کۆنتڕۆڵەکان</b></div>
+      <div><b>تیری چەپ / ڕاست:</b>جوڵەی چەپ / ڕاست</div>
+      <div><b>تیری خوارەوە:</b> بلۆک هەڵگرتن یان دابەزاندن</div>
+    </div>
+  </div>
+
+  <div id="levelCompletionModal" class="modal">
+    <div class="modal-content">
+      <h2>🎉 Level Complete!</h2>
+      <!-- Added completion stats -->
+      <div id="completionStats">Moves: 0 | Time: 0s</div>
+      <div class="modal-buttons">
+        <button onclick="nextLevel()">Next Level ➡️</button>
+        <button onclick="yakamrestartLevel()">Restart Level 🔁</button>
+        <button onclick="window.location.href='index.html'">Go to Menu 🏠</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+// Your original game variables
+const canvas = document.getElementById('game');
+const context = canvas.getContext('2d', { willReadFrequently: true });
+let grid = 32;
+const wallCanvas = document.createElement('canvas');
+const wallCtx = wallCanvas.getContext('2d');
+wallCanvas.width = wallCanvas.height = grid;
+
+// Enhanced game state tracking
+let gameState = {
+  moves: 0,
+  history: [],
+  shakeIntensity: 0,
+  startTime: Date.now(),
+  isAnimating: false
+};
+
+// Animation tracking
+const animations = {
+  blocks: {},
+  player: null
+};
+
+// Your original drawWall function with pixel-perfect enhancement
+function drawWall(ctx, x, y, size) {
+    // Round coordinates for crisp pixels
+    x = Math.round(x);
+    y = Math.round(y);
+    size = Math.round(size);
+    
+    const brickColor1 = '#8B4513';
+    const brickColor2 = '#A0522D';
+    const mortarColor = '#A9A9A9';
+
+    ctx.fillStyle = mortarColor;
+    ctx.fillRect(x, y, size, size);
+
+    const brickHeight = size / 3 - 1;
+    const brickWidth = size / 2 - 1;
+
+    ctx.fillStyle = brickColor1;
+    ctx.fillRect(x + 1, y + 1, brickWidth, brickHeight);
+    ctx.fillStyle = brickColor2;
+    ctx.fillRect(x + brickWidth + 2, y + 1, brickWidth, brickHeight);
+
+    ctx.fillStyle = brickColor2;
+    ctx.fillRect(x + 1, y + brickHeight + 2, brickWidth / 2 - 1, brickHeight);
+    ctx.fillStyle = brickColor1;
+    ctx.fillRect(x + brickWidth / 2 + 1, y + brickHeight + 2, brickWidth, brickHeight);
+    ctx.fillStyle = brickColor2;
+    ctx.fillRect(x + brickWidth * 1.5 + 2, y + brickHeight + 2, brickWidth / 2 - 1, brickHeight);
+
+    ctx.fillStyle = brickColor1;
+    ctx.fillRect(x + 1, y + (brickHeight * 2) + 3, brickWidth, brickHeight);
+    ctx.fillStyle = brickColor2;
+    ctx.fillRect(x + brickWidth + 2, y + (brickHeight * 2) + 3, brickWidth, brickHeight);
+
+    ctx.fillStyle = 'rgba(0,0,0,0.15)';
+    ctx.fillRect(x + 1, y + 1, brickWidth, 2);
+    ctx.fillRect(x + 1, y + brickHeight, brickWidth, 2);
+    ctx.fillRect(x + brickWidth + 2, y + 1, brickWidth, 2);
+    ctx.fillRect(x + brickWidth + 2, y + brickHeight, brickWidth, 2);
+}
+
+drawWall(wallCtx, 0, 0, grid);
+
+// Your original game variables
+let playerDir = { row: 0, col: 0 };
+let playerPos = { row: 0, col: 0 };
+let playerFacing = -1;
+let rAF = null;
+let carryingBlock = false;
+let width = 0;
+
+const types = {
+  wall: '#',
+  player: '@',
+  block: '$',
+  goal: '.',
+  empty: ' '
+};
+
+// Your original levels array
+const levels = [
+    `
+   #    ##        ##
+   #                #
+   #                 #
+   #                   #
+   #                   #
+   #                   #
+   #    .           @  #
+   #####################
+  `.trim(),
+  `
+   #    ##        ##
+   #                #
+   #                 #
+   #                   #
+   #                   #
+   #         #         #
+   #     .   #      @ $#
+   #####################
+  `.trim(),
+  `
+  #    ##        ##
+  #                #
+ ##                 #
+#.                   #
+###                   #
+  #           #  $    #
+  #           #$ $$@  #
+  #####   #############
+      #  $#
+      #####
+`.trim(),
+  `
+   #              #
+   #    ##        #
+   #           #    #
+  ##           #   . #
+  #       #############
+  #$  #####            #
+   #           #  $    #
+   #           #$ $$@  #
+   #####   #############
+       #$ $#
+       #####
+  `.trim(),
+  `
+  ####################
+  #                  #
+  #  .   #           #
+  ########           #
+  #       #######    #
+  #                 $#
+  #             ######
+  #      $$            #
+  #     $$$         @ $#
+  #####################
+  `.trim(),
+];
+
+let currentLevel = 0;
+let cells = [];
+
+// Enhanced loadLevel function
+function loadLevel(levelIndex) {
+  const level = levels[levelIndex];
+  width = 0;
+  cells = [];
+  level.split('\n')
+    .filter(rowData => !!rowData)
+    .forEach((rowData, row) => {
+      cells[row] = [];
+      if (rowData.length > width) width = rowData.length;
+      rowData.split('').forEach((colData, col) => {
+        cells[row][col] = colData;
+        if (colData === types.player) {
+          playerPos = { row, col };
+        }
+      });
+      localStorage.setItem('completedLevel', Math.max(currentLevel, parseInt(localStorage.getItem('completedLevel')) || 0));
+    });
+
+  document.getElementById("levelDisplay").innerText = "Level: " + (levelIndex + 1);
+  document.getElementById("levelSelect").value = levelIndex;
+  playerDir = { row: 0, col: 0 };
+  width = Math.max(width, 12);
+  carryingBlock = false;
+  gameState.moves = 0;
+  gameState.history = [];
+  gameState.startTime = Date.now();
+  updateStats();
+  resizeCanvas();
+}
+
+// Your original getUrlParameter function
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+// Initialize level from URL parameter
+const urlLevel = getUrlParameter('level');
+if (urlLevel !== '') {
+    const parsedLevel = parseInt(urlLevel);
+    if (!isNaN(parsedLevel) && parsedLevel >= 0 && parsedLevel < levels.length) {
+        currentLevel = parsedLevel;
+    } else {
+        currentLevel = 0;
+    }
+}
+
+loadLevel(currentLevel);
+
+// Enhanced movement functions with visual feedback
+function moveLeft() {
+  playerDir = { row: 0, col: -1 };
+  playSoundById("block");
+}
+
+function moveRight() {
+  playerDir = { row: 0, col: 1 };
+  playSoundById("block");
+}
+
+function moveDown() {
+  const nextCol = playerFacing + playerPos.col;
+  const nextCell = cells[playerPos.row][nextCol];
+  const cellAbove = cells[playerPos.row - 1] ? cells[playerPos.row - 1][nextCol] : undefined;
+
+  if (!carryingBlock && nextCell === types.block && cellAbove === types.empty) {
+    cells[playerPos.row][nextCol] = types.empty;
+    cells[playerPos.row - 1][playerPos.col] = types.block;
+    carryingBlock = true;
+    playSoundById("block");
+    // Visual feedback for picking up block
+    gameState.shakeIntensity = 2;
+  } else if (carryingBlock) {
+    let row = playerPos.row;
+    let finalDropRow = row;
+
+    if (nextCell === types.empty) {
+      let rowBelow = row + 1;
+      let belowCell = cells[rowBelow] ? cells[rowBelow][nextCol] : undefined;
+      while (belowCell === types.empty || belowCell === types.goal) {
+        finalDropRow = rowBelow;
+        rowBelow++;
+        belowCell = cells[rowBelow] ? cells[rowBelow][nextCol] : undefined;
+        if (rowBelow >= cells.length || belowCell === undefined) break;
+      }
+    } else if (nextCell === types.wall || nextCell === types.block) {
+      if (cellAbove === types.empty) {
+        finalDropRow = playerPos.row - 1;
+      } else {
+        playSoundById("fix");
+        // Visual feedback for failed action
+        gameState.shakeIntensity = 3;
+        return;
+      }
+    } else {
+        playSoundById("fix");
+        gameState.shakeIntensity = 3;
+        return;
+    }
+
+    cells[playerPos.row - 1][playerPos.col] = types.empty;
+    cells[finalDropRow][nextCol] = types.block;
+    carryingBlock = false;
+    playSoundById("block");
+    // Visual feedback for dropping block
+    gameState.shakeIntensity = 5;
+  }
+
+  requestAnimationFrame(loop);
+}
+
+// Confetti particle effect
+function createConfetti(x, y) {
+  const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+  const particleCount = 100;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'confetti-particle';
+    document.body.appendChild(particle);
+    
+    const size = Math.random() * 12 + 6;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 8 + 4;
+    const rotationSpeed = (Math.random() - 0.5) * 20;
+    const lifetime = Math.random() * 1500 + 1000;
+    // Replace your canvas initialization with this:
+const canvas = document.getElementById('game');
+const context = canvas.getContext('2d', {
+  alpha: true,
+  desynchronized: true // Improves performance
+});
+
+// Enable high-quality rendering
+canvas.style.imageRendering = 'crisp-edges';
+context.imageSmoothingEnabled = false;
+context.imageSmoothingQuality = 'high';
+    
+    particle.style.cssText = `
+      position: fixed;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${color};
+      left: ${x}px;
+      top: ${y}px;
+      border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+      pointer-events: none;
+      z-index: 1000;
+      transform-origin: center;
+    `;
+    function drawWall(ctx, x, y, size) {
+    // Round coordinates for pixel-perfect placement
+    x = Math.round(x);
+    y = Math.round(y);
+    size = Math.round(size);
+    
+    // Base mortar color
+    ctx.fillStyle = '#7a7a7a';
+    ctx.fillRect(x, y, size, size);
+    
+    // Brick colors with variation
+    const brickColors = ['#8B4513', '#A0522D', '#964B00'];
+    const mortarLines = '#5a5a5a';
+    
+    // Brick dimensions
+    const brickWidth = size / 2.2;
+    const brickHeight = size / 3.5;
+    const brickPadding = 1;
+    
+    // Draw brick pattern
+    for (let row = 0; row < 3; row++) {
+        const offset = row % 2 === 0 ? 0 : -brickWidth/2;
+        
+        for (let col = 0; col < 3; col++) {
+            const brickX = x + offset + col * brickWidth + brickPadding;
+            const brickY = y + row * brickHeight + brickPadding;
+            const brickW = brickWidth - brickPadding*2;
+            const brickH = brickHeight - brickPadding*2;
+            
+            // Alternate brick colors
+            ctx.fillStyle = brickColors[(row + col) % brickColors.length];
+            ctx.fillRect(brickX, brickY, brickW, brickH);
+            
+            // Brick highlights
+            ctx.strokeStyle = '#ffffff10';
+            ctx.lineWidth = 0.5;
+            ctx.strokeRect(brickX + 0.5, brickY + 0.5, brickW - 1, brickH - 1);
+            
+            // Brick texture
+            ctx.fillStyle = '#00000010';
+            for (let i = 0; i < 2; i++) {
+                ctx.fillRect(
+                    brickX + 1 + i*2, 
+                    brickY + 1, 
+                    1, 
+                    brickH - 2
+                );
+            }
+        }
+    }
+    
+    // Mortar lines
+    ctx.strokeStyle = mortarLines;
+    ctx.lineWidth = 1;
+    for (let row = 1; row < 3; row++) {
+        ctx.beginPath();
+        ctx.moveTo(x, y + row * brickHeight);
+        ctx.lineTo(x + size, y + row * brickHeight);
+        ctx.stroke();
+    }
+}
+    
+    const startTime = Date.now();
+    
+    function update() {
+      const elapsed = Date.now() - startTime;
+      const progress = elapsed / lifetime;
+      
+      if (progress >= 1) {
+        particle.remove();
+        return;
+      }
+      
+      const currentX = x + Math.cos(angle) * velocity * elapsed * 0.2;
+      const currentY = y + Math.sin(angle) * velocity * elapsed * 0.2 + (elapsed * 0.001 * 9.8 * elapsed * 0.001);
+      const rotation = rotationSpeed * elapsed * 0.001;
+      const scale = 1 - progress;
+      const opacity = 1 - (progress * progress);
+      
+      particle.style.transform = `translate(${currentX - x}px, ${currentY - y}px) rotate(${rotation}deg) scale(${scale})`;
+      particle.style.opacity = opacity;
+      
+      requestAnimationFrame(update);
+    }
+    
+    update();
+  }
+}
+
+// Stats tracking
+function updateStats() {
+  document.getElementById("moveCounter").textContent = `Moves: ${gameState.moves}`;
+  const elapsed = Math.floor((Date.now() - gameState.startTime) / 1000);
+  document.getElementById("completionStats").textContent = `Moves: ${gameState.moves} | Time: ${elapsed}s`;
+}
+
+// Undo functionality
+function undoMove() {
+  if (gameState.history.length > 0 && !gameState.isAnimating) {
+    const prevState = gameState.history.pop();
+    cells = prevState.cells.map(row => [...row]);
+    playerPos = {...prevState.playerPos};
+    carryingBlock = prevState.carryingBlock;
+    gameState.moves--;
+    updateStats();
+    requestAnimationFrame(loop);
+    playSoundById("block");
+  }
+}
+
+// Enhanced move function with history tracking
+function move(startPos, endPos) {
+  gameState.history.push(JSON.parse(JSON.stringify({
+    cells: cells.map(row => [...row]),
+    playerPos: {...playerPos},
+    carryingBlock
+  })));
+
+  if (gameState.history.length > 50) {
+    gameState.history.shift();
+  }
+
+  const startCell = cells[startPos.row][startPos.col];
   const isPlayer = startCell === types.player;
 
   switch(startCell) {
@@ -600,6 +1911,8 @@ function move(startPos, endPos) {
   }
 
   playerFacing = endPos.col - startPos.col;
+  gameState.moves++;
+  updateStats();
 
   if (carryingBlock) {
     cells[startPos.row - 1][startPos.col] = types.empty;
@@ -607,6 +1920,7 @@ function move(startPos, endPos) {
   }
 }
 
+// Your original playSoundById function
 function playSoundById(id) {
   const sound = document.getElementById(id);
   if (sound) {
@@ -615,32 +1929,55 @@ function playSoundById(id) {
   }
 }
 
-
+// Enhanced resizeCanvas function with pixel scaling
 function resizeCanvas() {
   const gameContainer = document.querySelector('body');
-  const availableWidth = gameContainer.clientWidth - 20; // 20 for padding
-  const availableHeight = gameContainer.clientHeight - (document.querySelector('.game-controls-container').clientHeight + document.querySelector('.control-buttons').clientHeight + 40); // 40 for margins/gaps
+  const availableWidth = gameContainer.clientWidth - 20;
+  const availableHeight = gameContainer.clientHeight - 
+    (document.querySelector('.game-controls-container').clientHeight + 
+     document.querySelector('.control-buttons').clientHeight + 40);
 
-  const maxCellsX = 12; // Number of cells to show horizontally
-  const maxCellsY = 8;  // Number of cells to show vertically
+  const maxCellsX = 12;
+  const maxCellsY = 8;
 
-  const newGridSizeX = Math.floor(availableWidth / maxCellsX);
-  const newGridSizeY = Math.floor(availableHeight / maxCellsY);
+  // Calculate base grid size
+  let baseGrid = Math.min(
+    Math.floor(availableWidth / maxCellsX),
+    Math.floor(availableHeight / maxCellsY)
+  );
+  baseGrid = Math.max(baseGrid, 16);
+
+  // Apply pixel scaling
+  const PIXEL_SCALE = window.devicePixelRatio > 1 ? 2 : 1;
+  grid = baseGrid * PIXEL_SCALE;
   
-  grid = Math.min(newGridSizeX, newGridSizeY);
-  grid = Math.max(grid, 16); // Minimum grid size to avoid being too small
-  
+  // Set canvas size
+  canvas.style.width = `${baseGrid * Math.min(width, maxCellsX)}px`;
+  canvas.style.height = `${baseGrid * Math.min(cells.length, maxCellsY)}px`;
   canvas.width = grid * Math.min(width, maxCellsX);
   canvas.height = grid * Math.min(cells.length, maxCellsY);
 
+  // Configure context for crisp pixels
+  context.imageSmoothingEnabled = false;
+  
+  // Redraw wall texture at new size
   wallCanvas.width = wallCanvas.height = grid;
   drawWall(wallCtx, 0, 0, grid);
 }
 
-
+// Enhanced loop function with visual effects
 function loop() {
   rAF = requestAnimationFrame(loop);
-  context.clearRect(0,0,canvas.width,canvas.height);
+  
+  // Apply screen shake if needed
+  const shakeOffset = gameState.shakeIntensity > 0 ? 
+    (Math.random() - 0.5) * gameState.shakeIntensity : 0;
+  gameState.shakeIntensity = Math.max(0, gameState.shakeIntensity - 0.5);
+  
+  context.save();
+  context.translate(shakeOffset, 0);
+  
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
   let row = playerPos.row + playerDir.row;
   const col = playerPos.col + playerDir.col;
@@ -668,12 +2005,11 @@ function loop() {
           playSoundById("goalSound");
           cancelAnimationFrame(rAF);
           document.getElementById('levelCompletionModal').style.display = 'flex';
-          const nextLevelButton = document.getElementById("nextLevelButton");
-          if (nextLevelButton) {
-              nextLevelButton.disabled = false;
-              nextLevelButton.style.backgroundColor = '#4CAF50';
-              nextLevelButton.style.cursor = 'pointer';
-          }
+          createConfetti(
+            canvas.offsetLeft + playerPos.col * (grid / (window.devicePixelRatio > 1 ? 2 : 1)) + (grid / (window.devicePixelRatio > 1 ? 4 : 2)),
+            canvas.offsetTop + playerPos.row * (grid / (window.devicePixelRatio > 1 ? 2 : 1)) + (grid / (window.devicePixelRatio > 1 ? 4 : 2))
+          );
+          updateStats();
         }
         break;
 
@@ -713,24 +2049,65 @@ function loop() {
           break;
 
         case types.block:
-          context.save();
-          context.translate(drawCol * grid, drawRow * grid);
-          context.fillStyle = '#8B4513';
-          context.fillRect(0, 0, grid, grid);
-          let gradient = context.createLinearGradient(0, 0, grid, grid);
-          gradient.addColorStop(0, 'rgba(255,255,255,0.2)');
-          gradient.addColorStop(1, 'rgba(0,0,0,0.2)');
-          context.fillStyle = gradient;
-          context.fillRect(0, 0, grid, grid);
-          context.strokeStyle = '#5A2D0C';
-          context.lineWidth = 2;
-          context.strokeRect(1, 1, grid - 2, grid - 2);
-          context.restore();
-          break;
+  context.save();
+  context.translate(drawCol * grid, drawRow * grid);
+  
+  // Wooden crate with high-detail texture
+  const woodColors = ['#8B4513', '#A0522D', '#CD853F'];
+  
+  // Main crate
+  context.fillStyle = woodColors[0];
+  context.fillRect(0, 0, grid, grid);
+  
+  // Wood grain details
+  context.strokeStyle = '#5A2D0C';
+  context.lineWidth = 1;
+  for (let i = 0; i < 5; i++) {
+    const yPos = (i + 0.5) * (grid / 5);
+    context.beginPath();
+    context.moveTo(2, yPos);
+    context.bezierCurveTo(
+      grid/3, yPos + 1,
+      grid*2/3, yPos - 1,
+      grid-2, yPos
+    );
+    context.stroke();
+  }
+  
+  // Metal bands
+  context.fillStyle = '#777777';
+  context.fillRect(0, grid*0.3, grid, 3);
+  context.fillRect(0, grid*0.7, grid, 3);
+  context.fillRect(grid*0.3, 0, 3, grid);
+  context.fillRect(grid*0.7, 0, 3, grid);
+  
+  // Nail details
+  context.fillStyle = '#aaaaaa';
+  const nailPositions = [
+    [grid*0.3, grid*0.3], [grid*0.7, grid*0.3],
+    [grid*0.3, grid*0.7], [grid*0.7, grid*0.7]
+  ];
+  nailPositions.forEach(pos => {
+    context.beginPath();
+    context.arc(pos[0], pos[1], 1, 0, Math.PI*2);
+    context.fill();
+  });
+  
+  // Shadow effect
+  context.fillStyle = 'rgba(0,0,0,0.1)';
+  context.fillRect(2, 2, grid, grid);
+  
+  context.restore();
+  break;
 
         case types.goal:
           context.save();
           context.translate((drawCol + 0.5) * grid, (drawRow + 0.5) * grid);
+          
+          // Pulsing effect
+          const pulse = Math.sin(Date.now() * 0.005) * 0.1 + 1;
+          context.scale(pulse, pulse);
+          
           context.beginPath();
           context.arc(0, 0, grid * 0.45, 0, Math.PI * 2);
           context.fillStyle = '#FFD700';
@@ -738,6 +2115,8 @@ function loop() {
           context.strokeStyle = '#DAA520';
           context.lineWidth = 2;
           context.stroke();
+          
+          // Star pattern
           context.beginPath();
           const spikes = 5;
           const outerRadius = grid * 0.3;
@@ -758,56 +2137,315 @@ function loop() {
           break;
 
         case types.player:
-          context.save();
-          context.translate((drawCol + 0.5) * grid, (drawRow + 0.5) * grid);
-          context.fillStyle = '#007BFF';
-          context.fillRect(-grid * 0.15, -grid * 0.3, grid * 0.3, grid * 0.5);
-          context.beginPath();
-          context.arc(0, -grid * 0.45, grid * 0.18, 0, Math.PI * 2);
-          context.fillStyle = '#FFDAB9';
-          context.fill();
-          context.strokeStyle = '#333';
-          context.lineWidth = 1;
-          context.stroke();
-          context.fillStyle = 'black';
-          const eyeOffset = playerFacing * grid * 0.05;
-          context.beginPath();
-          context.arc(eyeOffset - grid * 0.05, -grid * 0.5, 1.5, 0, Math.PI * 2);
-          context.arc(eyeOffset + grid * 0.05, -grid * 0.5, 1.5, 0, Math.PI * 2);
-          context.fill();
-          context.beginPath();
-          context.arc(0, -grid * 0.55, grid * 0.2, Math.PI, Math.PI * 2);
-          context.lineTo(grid * 0.2, -grid * 0.55);
-          context.lineTo(grid * 0.25, -grid * 0.5);
-          context.lineTo(-grid * 0.25, -grid * 0.5);
-          context.lineTo(-grid * 0.2, -grid * 0.55);
-          context.closePath();
-          context.fillStyle = '#FF4500';
-          context.fill();
-          context.strokeStyle = '#CD3700';
-          context.lineWidth = 1;
-          context.stroke();
-          context.strokeStyle = '#007BFF';
-          context.lineWidth = 3;
-          context.beginPath();
-          context.moveTo(-grid * 0.15, -grid * 0.2);
-          context.lineTo(-grid * 0.35, -grid * 0.1);
-          context.moveTo(grid * 0.15, -grid * 0.2);
-          context.lineTo(grid * 0.35, -grid * 0.1);
-          context.stroke();
-          context.beginPath();
-          context.moveTo(-grid * 0.1, grid * 0.1);
-          context.lineTo(-grid * 0.15, grid * 0.45);
-          context.moveTo(grid * 0.1, grid * 0.1);
-          context.lineTo(grid * 0.15, grid * 0.45);
-          context.stroke();
-          context.restore();
-          break;
+  context.save();
+  context.translate((drawCol + 0.5) * grid, (drawRow + 0.60) * grid);
+  
+  // 1. Dynamic Animations
+  const idleBob = Math.sin(Date.now() * 0.005) * 2;
+  const moveBob = Math.abs(playerDir.col) * Math.sin(Date.now() * 0.02) * 3;
+  context.translate(0, idleBob + moveBob);
+  
+  // 2. Improved Physics - Dynamic Shadow
+  const shadowScaleX = 0.2 + Math.abs(playerFacing) * 0.05;
+  const shadowScaleY = 0.08 - Math.abs(idleBob) * 0.01;
+  context.fillStyle = `rgba(0,0,0,${0.15 - moveBob * 0.02})`;
+  context.beginPath();
+  context.ellipse(0, grid * 0.3, grid * shadowScaleX, grid * shadowScaleY, 0, 0, Math.PI * 2);
+  context.fill();
+
+  // 3. Body with Directional Shading
+  const bodyGradient = context.createLinearGradient(
+    playerFacing * grid * 0.2, 0,
+    playerFacing * -grid * 0.2, 0
+  );
+  bodyGradient.addColorStop(0, playerFacing < 0 ? '#2980b9' : '#3498db');
+  bodyGradient.addColorStop(1, playerFacing > 0 ? '#2980b9' : '#3498db');
+  
+  context.fillStyle = bodyGradient;
+  context.beginPath();
+  
+  // 4. Enhanced Body Shape
+  context.moveTo(-grid * 0.15, -grid * 0.25);
+  context.bezierCurveTo(
+    0, -grid * 0.3 + moveBob * 0.5,
+    0, -grid * 0.3 + moveBob * 0.5,
+    grid * 0.15, -grid * 0.25
+  );
+  context.lineTo(grid * 0.18, grid * 0.15);
+  context.quadraticCurveTo(0, grid * 0.25, -grid * 0.18, grid * 0.15);
+  context.closePath();
+  context.fill();
+  
+  // Clothing Details
+  context.strokeStyle = '#2c3e50';
+  context.lineWidth = 1.5;
+  context.stroke();
+  
+  // Belt with buckle
+  context.fillStyle = '#e67e22';
+  context.fillRect(-grid * 0.18, grid * 0.05, grid * 0.36, grid * 0.04);
+  context.fillStyle = '#f1c40f';
+  context.fillRect(-grid * 0.03, grid * 0.03, grid * 0.06, grid * 0.08);
+  
+  // 5. Head with Expressive Features
+  context.beginPath();
+  context.arc(0, -grid * 0.4, grid * 0.2, 0, Math.PI * 2);
+  const headGradient = context.createRadialGradient(
+    playerFacing * 0.1, -grid * 0.45, grid * 0.05,
+    0, -grid * 0.4, grid * 0.2
+  );
+  headGradient.addColorStop(0, '#f5d6b3');
+  headGradient.addColorStop(1, '#e0ac69');
+  context.fillStyle = headGradient;
+  context.fill();
+  
+  // Directional Hair
+  context.fillStyle = '#2c3e50';
+  context.beginPath();
+  context.arc(0, -grid * 0.45, grid * 0.18, Math.PI, Math.PI * 2);
+  context.lineTo(grid * 0.15, -grid * 0.45);
+  context.quadraticCurveTo(
+    playerFacing * 0.1, -grid * 0.6, 
+    -grid * 0.15, -grid * 0.45
+  );
+  context.fill();
+  
+  // 6. Blinking Eyes Animation
+  const blink = Math.sin(Date.now() * 0.002) > 0.8 ? 1 : 0;
+  const eyeOffset = playerFacing * grid * 0.1;
+  
+  if (blink) {
+    // Closed eyes
+    context.fillStyle = '#2c3e50';
+    context.fillRect(eyeOffset - grid * 0.08, -grid * 0.42, grid * 0.16, 2);
+  } else {
+    // Open eyes
+    context.fillStyle = 'white';
+    context.beginPath();
+    context.arc(eyeOffset - grid * 0.05, -grid * 0.42, grid * 0.04, 0, Math.PI * 2);
+    context.arc(eyeOffset + grid * 0.05, -grid * 0.42, grid * 0.04, 0, Math.PI * 2);
+    context.fill();
+    
+    context.fillStyle = '#2c3e50';
+    context.beginPath();
+    context.arc(eyeOffset - grid * 0.05, -grid * 0.42, grid * 0.02, 0, Math.PI * 2);
+    context.arc(eyeOffset + grid * 0.05, -grid * 0.42, grid * 0.02, 0, Math.PI * 2);
+    context.fill();
+    
+    // Eyebrows showing effort
+    const browRaise = carryingBlock ? -grid * 0.05 : 0;
+    context.strokeStyle = '#2c3e50';
+    context.lineWidth = 2;
+    context.beginPath();
+    context.moveTo(eyeOffset - grid * 0.1, -grid * 0.47 + browRaise);
+    context.lineTo(eyeOffset - grid * 0.02, -grid * 0.45 + browRaise);
+    context.moveTo(eyeOffset + grid * 0.02, -grid * 0.45 + browRaise);
+    context.lineTo(eyeOffset + grid * 0.1, -grid * 0.47 + browRaise);
+    context.stroke();
+  }
+  
+  // 7. Dynamic Mouth Expression
+  context.fillStyle = '#c0392b';
+  if (carryingBlock) {
+    // Open "straining" mouth
+    context.beginPath();
+    context.arc(0, -grid * 0.35, grid * 0.06, 0.2, Math.PI - 0.2);
+    context.strokeStyle = '#c0392b';
+    context.lineWidth = 2;
+    context.stroke();
+  } else {
+    // Neutral/smile mouth
+    context.beginPath();
+    context.arc(0, -grid * 0.36, grid * 0.05, 0.1, Math.PI - 0.1);
+    context.fill();
+  }
+  
+  // 8. Arms with Movement Physics
+  context.strokeStyle = '#2980b9';
+  context.lineWidth = grid * 0.07;
+  context.lineCap = 'round';
+  context.beginPath();
+  
+  // Left arm (more dynamic when moving)
+  const armSwing = Math.sin(Date.now() * 0.02) * playerDir.col * grid * 0.1;
+  context.moveTo(-grid * 0.15, -grid * 0.1);
+  if (playerFacing < 0) {
+    context.lineTo(-grid * 0.3 - armSwing, 0); 
+  } else {
+    context.lineTo(-grid * 0.2 - armSwing * 0.5, -grid * 0.05);
+  }
+  
+  // Right arm
+  context.moveTo(grid * 0.15, -grid * 0.1);
+  if (playerFacing > 0) {
+    context.lineTo(grid * 0.3 + armSwing, 0);
+  } else {
+    context.lineTo(grid * 0.2 + armSwing * 0.5, -grid * 0.05);
+  }
+  context.stroke();
+  
+  // 9. Legs with Weight Shift
+  context.beginPath();
+  const legShift = playerDir.col * grid * 0.03;
+  context.moveTo(-grid * 0.1, grid * 0.15);
+  context.lineTo(-grid * 0.12 + legShift, grid * 0.35);
+  context.moveTo(grid * 0.1, grid * 0.15);
+  context.lineTo(grid * 0.12 + legShift, grid * 0.35);
+  context.stroke();
+  
+  // 10. Enhanced Carrying Animation
+  if (carryingBlock) {
+    context.save();
+    context.translate(0, -grid * 0.6 + Math.sin(Date.now() * 0.03) * 1.5);
+    
+    // Block shadow
+    context.fillStyle = 'rgba(0,0,0,0.2)';
+    context.beginPath();
+    context.ellipse(0, grid * 0.05, 
+                   grid * 0.15 + Math.abs(armSwing) * 0.02, 
+                   grid * 0.05, 0, 0, Math.PI * 2);
+    context.fill();
+    
+    // Detailed wooden crate
+    context.fillStyle = '#8B4513';
+    context.fillRect(-grid * 0.15, -grid * 0.15, grid * 0.3, grid * 0.3);
+    
+    // Crate details
+    context.strokeStyle = '#5A2D0C';
+    context.lineWidth = 1.5;
+    context.strokeRect(-grid * 0.15, -grid * 0.15, grid * 0.3, grid * 0.3);
+    
+    // Wood plank details
+    for (let i = -1; i <= 1; i += 0.5) {
+      context.beginPath();
+      context.moveTo(-grid * 0.15, i * grid * 0.1);
+      context.lineTo(grid * 0.15, i * grid * 0.1);
+      context.stroke();
+    }
+    
+    // Rope physics
+    context.strokeStyle = '#654321';
+    context.lineWidth = 1.2;
+    context.beginPath();
+    context.moveTo(-grid * 0.1, -grid * 0.15);
+    context.quadraticCurveTo(
+      -grid * 0.05, -grid * 0.3,
+      -grid * 0.1, -grid * 0.4
+    );
+    context.moveTo(grid * 0.1, -grid * 0.15);
+    context.quadraticCurveTo(
+      grid * 0.05, -grid * 0.3,
+      grid * 0.1, -grid * 0.4
+    );
+    context.stroke();
+    
+    context.restore();
+  }
+  
+  context.restore();
+  break;
       }
     }
   }
+  
+  context.restore(); // Restore from screen shake
 }
 
+// Your original utility functions
+function clamp(min, max, value) {
+  return Math.min(Math.max(min, value), max);
+}
+
+function restartLevel() {
+  carryingBlock = false;
+  loadLevel(currentLevel);
+  playerDir = { row: 0, col: 0 };
+  cancelAnimationFrame(rAF);
+  requestAnimationFrame(loop);
+  playSoundById("run");
+  document.getElementById('levelCompletionModal').style.display = 'none';
+}
+
+function yakamrestartLevel() {
+  carryingBlock = false;
+  loadLevel(currentLevel);
+  playerDir = { row: 0, col: 0 };
+  cancelAnimationFrame(rAF);
+  requestAnimationFrame(loop);
+  document.getElementById('levelCompletionModal').style.display = 'none';
+}
+
+function selectLevel(levelIndex) {
+  currentLevel = parseInt(levelIndex);
+  carryingBlock = false;
+  loadLevel(currentLevel);
+  cancelAnimationFrame(rAF);
+  requestAnimationFrame(loop);
+  document.getElementById('levelCompletionModal').style.display = 'none';
+}
+
+function nextLevel() {
+  document.getElementById('levelCompletionModal').style.display = 'none';
+  if (currentLevel < levels.length - 1) {
+    currentLevel++;
+    carryingBlock = false;
+    loadLevel(currentLevel);
+    cancelAnimationFrame(rAF);
+    requestAnimationFrame(loop);
+  } else {
+    showMessage("🏁 All levels complete! Redirecting to Level Selection...", 2000);
+    setTimeout(() => {
+        window.location.href = 'level.html';
+    }, 2000);
+  }
+}
+
+function showMessage(text, duration = 10000) {
+  const msg = document.createElement("div");
+  msg.innerText = text;
+  msg.style.position = "absolute";
+  msg.style.top = "10px";
+  msg.style.background = "white";
+  msg.style.color = "black";
+  msg.style.padding = "5px 10px";
+  msg.style.border = "1px solid black";
+  msg.style.borderRadius = "5px";
+  msg.style.fontSize = "14px";
+  msg.style.zIndex = "1000";
+  document.body.appendChild(msg);
+
+  setTimeout(() => {
+    msg.remove();
+  }, duration);
+}
+
+// Enhanced touch controls
+let touchStartX = 0;
+let touchStartY = 0;
+
+canvas.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, {passive: false});
+
+canvas.addEventListener('touchend', (e) => {
+  e.preventDefault();
+  const touchEndX = e.changedTouches[0].clientX;
+  const touchEndY = e.changedTouches[0].clientY;
+  
+  const dx = touchEndX - touchStartX;
+  const dy = touchEndY - touchStartY;
+  
+  if (Math.abs(dx) > Math.abs(dy)) {
+    if (dx > 0) moveRight();
+    else moveLeft();
+  } else {
+    if (dy > 0) moveDown();
+  }
+}, {passive: false});
+
+// Your original keyboard controls with undo added
 document.addEventListener('keydown', function(e) {
   playerDir = { row: 0, col: 0};
   if (e.which === 37) {
@@ -819,13 +2457,17 @@ document.addEventListener('keydown', function(e) {
   } else if (e.which === 40) {
     moveDown();
     e.preventDefault();
+  } else if (e.which === 90 && e.ctrlKey) { // Ctrl+Z for undo
+    undoMove();
+    e.preventDefault();
   }
 });
 
+// Initialize the game
 window.addEventListener('resize', resizeCanvas);
-resizeCanvas(); // Initial call to set canvas size
+resizeCanvas();
 
-// start the game
+// Start the game
 requestAnimationFrame(loop);
 </script>
 </body>
