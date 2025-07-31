@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Game Products" data-ku="بەرهەمەکانی یاری">Game Products</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(testt.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #4CAF50;
+        }
+
+        .language-switcher {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .language-btn.active {
+            background-color: #4CAF50;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .buy-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            background-color: #45a049;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .menu-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #45a049;
+        }
+
+        /* RTL styles for Kurdish */
+        body[dir="rtl"] {
+            direction: rtl;
+        }
+
+        body[dir="rtl"] .product-info {
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-switcher">
+            <button class="language-btn active" onclick="changeLanguage('en')">English</button>
+            <button class="language-btn" onclick="changeLanguage('ku')">کوردی</button>
+        </div>
+        
+        <h1 data-en="Game Products" data-ku="بەرهەمەکانی یاری">Game Products</h1>
+        
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="game.png" alt="Game Expansion" class="product-image">
+                <div class="product-info">
+                    <div class="product-title" data-en="Premium Characters" data-ku="کەسایەتییە پریمیومەکان">Premium Characters</div>
+                    <div class="product-description" data-en="Unlock 5 special characters with unique abilities" data-ku="5 کەسایەتی تایبەت بە توانای تایبەت بکەرەوە">Unlock 5 special characters with unique abilities</div>
+                    <div class="product-price">$4.99</div>
+                    <button class="buy-btn" data-en="Buy Now" data-ku="ئێستا بکڕە">Buy Now</button>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="game.png" alt="Level Pack" class="product-image">
+                <div class="product-info">
+                    <div class="product-title" data-en="Adventure Pack" data-ku="پاکێجی سەرکێشی">Adventure Pack</div>
+                    <div class="product-description" data-en="15 challenging new levels with unique mechanics" data-ku="15 ئاستی نوێی بەرەنگارکەرەوە بە میکانیکی تایبەت">15 challenging new levels with unique mechanics</div>
+                    <div class="product-price">$6.99</div>
+                    <button class="buy-btn" data-en="Buy Now" data-ku="ئێستا بکڕە">Buy Now</button>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="game.png" alt="Cosmetic Pack" class="product-image">
+                <div class="product-info">
+                    <div class="product-title" data-en="Cosmetic Bundle" data-ku="بەندەلی جوانکاری">Cosmetic Bundle</div>
+                    <div class="product-description" data-en="Exclusive skins and visual effects for your character" data-ku="پێست و کاریگەری بینراوی تایبەت بۆ کەسایەتییەکەت">Exclusive skins and visual effects for your character</div>
+                    <div class="product-price">$3.49</div>
+                    <button class="buy-btn" data-en="Buy Now" data-ku="ئێستا بکڕە">Buy Now</button>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="game.png" alt="Starter Pack" class="product-image">
+                <div class="product-info">
+                    <div class="product-title" data-en="Starter Pack" data-ku="پاکێجی دەستپێک">Starter Pack</div>
+                    <div class="product-description" data-en="Perfect bundle for new players with bonus coins" data-ku="بەندەلی گونجاو بۆ یاریزانی نوێ لەگەڵ دراوی زیادە">Perfect bundle for new players with bonus coins</div>
+                    <div class="product-price">$2.99</div>
+                    <button class="buy-btn" data-en="Buy Now" data-ku="ئێستا بکڕە">Buy Now</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <a href="index.html" class="menu-button" data-en="Back to Main Menu" data-ku="گەڕانەوە بۆ پەڕەی سەرەکی">Back to Main Menu</a>
+        </div>
+    </div>
+
+    <script src="language.js"></script>
+    <script>
+        // Initialize language manager
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language from localStorage
+            const savedLang = localStorage.getItem('gameLanguage') || 'en';
+            changeLanguage(savedLang);
+            
+            // Update active language button
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.toggle('active', 
+                    btn.textContent === (savedLang === 'en' ? 'English' : 'کوردی'));
+            });
+        });
+
+        function changeLanguage(lang) {
+            // Set document direction
+            document.body.setAttribute('dir', lang === 'ku' ? 'rtl' : 'ltr');
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-en], [data-ku]').forEach(element => {
+                if (element.dataset[lang]) {
+                    element.textContent = element.dataset[lang];
+                }
+            });
+            
+            // Save language preference
+            localStorage.setItem('gameLanguage', lang);
+            
+            // Notify other pages if they're open
+            if (typeof BroadcastChannel !== 'undefined') {
+                const channel = new BroadcastChannel('language_channel');
+                channel.postMessage({language: lang});
+            }
+        }
+    </script>
+</body>
+</html>
