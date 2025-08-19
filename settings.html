@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Game Settings" data-ku="ڕێکخستنی یاری">Game Settings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(testt.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .language-switcher {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .language-btn.active {
+            background-color: #4CAF50;
+        }
+
+        .settings-section {
+            margin-bottom: 25px;
+        }
+
+        .settings-section h2 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .setting-label {
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .setting-control {
+            display: flex;
+            align-items: center;
+        }
+
+        select, input[type="range"] {
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        select:focus, input:focus {
+            outline: 2px solid #4CAF50;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-container input {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .menu-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #45a049;
+        }
+
+        .reset-btn {
+            background-color: #f44336;
+        }
+
+        .reset-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        /* RTL styles for Kurdish */
+        body[dir="rtl"] {
+            direction: rtl;
+        }
+
+        body[dir="rtl"] .setting-label {
+            margin-right: 0;
+            margin-left: 15px;
+        }
+
+        body[dir="rtl"] .checkbox-container {
+            flex-direction: row-reverse;
+        }
+
+        body[dir="rtl"] .checkbox-container input {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .setting-control {
+                margin-top: 10px;
+                width: 100%;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-switcher">
+            <button class="language-btn active" onclick="changeLanguage('en')">English</button>
+            <button class="language-btn" onclick="changeLanguage('ku')">کوردی</button>
+        </div>
+        
+        <h1 data-en="Game Settings" data-ku="ڕێکخستنی یاری">Game Settings</h1>
+        
+        <div class="settings-section">
+            <h2 data-en="Audio Settings" data-ku="ڕێکخستنی دەنگ">Audio Settings</h2>
+            
+            <div class="setting-item">
+                <span class="setting-label" data-en="Master Volume" data-ku="بڵندی دەنگ">Master Volume</span>
+                <div class="setting-control">
+                    <input type="range" id="masterVolume" min="0" max="100" value="80">
+                    <span id="volumeValue" style="margin-left: 10px; min-width: 30px;">80%</span>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <span class="setting-label" data-en="Sound Effects" data-ku="دەنگی کاریگەری">Sound Effects</span>
+                <div class="setting-control">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="soundEffects" checked>
+                        <label for="soundEffects" data-en="Enable" data-ku="چالاککردن">Enable</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <span class="setting-label" data-en="Background Music" data-ku="مۆسیقای پاشبنەما">Background Music</span>
+                <div class="setting-control">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="bgMusic" checked>
+                        <label for="bgMusic" data-en="Enable" data-ku="چالاککردن">Enable</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-section">
+            <h2 data-en="Game Controls" data-ku="ڕێکخستنی کۆنتڕۆڵ">Game Controls</h2>
+            
+            <div class="setting-item">
+                <span class="setting-label" data-en="Control Scheme" data-ku="شێوازی کۆنتڕۆڵ">Control Scheme</span>
+                <div class="setting-control">
+                    <select id="controlScheme">
+                        <option value="buttons" data-en="On-screen Buttons" data-ku="دوگمەی سەر شاشە">On-screen Buttons</option>
+                        <option value="swipe" data-en="Swipe Controls" data-ku="کۆنتڕۆڵی سوایپ">Swipe Controls</option>
+                        <option value="tilt" data-en="Tilt Controls" data-ku="کۆنتڕۆڵی تەوژم">Tilt Controls</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <span class="setting-label" data-en="Button Size" data-ku="قەبارەی دوگمە">Button Size</span>
+                <div class="setting-control">
+                    <select id="buttonSize">
+                        <option value="small" data-en="Small" data-ku="بچووک">Small</option>
+                        <option value="medium" selected data-en="Medium" data-ku="ناوەند">Medium</option>
+                        <option value="large" data-en="Large" data-ku="گەورە">Large</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-section">
+            <h2 data-en="Display" data-ku="ڕێکخستنی شاشە">Display</h2>
+            
+            <div class="setting-item">
+                <span class="setting-label" data-en="Theme" data-ku="ڕەنگ">Theme</span>
+                <div class="setting-control">
+                    <select id="theme">
+                        <option value="default" data-en="Default" data-ku="بنەڕەتی">Default</option>
+                        <option value="dark" data-en="Dark" data-ku="تاریک">Dark</option>
+                        <option value="light" data-en="Light" data-ku="ڕوون">Light</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <span class="setting-label" data-en="Animations" data-ku="جوڵەی بینراو">Animations</span>
+                <div class="setting-control">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="animations" checked>
+                        <label for="animations" data-en="Enable Animations" data-ku="چالاککردنی جوڵە">Enable Animations</label>
+                    </div>
+                </div>
+            </div>
+            
+           
+        </div>
+        
+        <div class="button-container">
+            <button class="menu-button" onclick="saveSettings()" data-en="Save Settings" data-ku="پاشەکەوتکردنی ڕێکخستنەکان">Save Settings</button>
+            <button class="menu-button reset-btn" onclick="resetSettings()" data-en="Reset to Default" data-ku="گەڕاندنەوە بۆ ڕێکخستنی بنەڕەتی">Reset to Default</button>
+            <a href="index.html" class="menu-button" data-en="Back to Main Menu" data-ku="گەڕانەوە بۆ پەڕەی سەرەکی">Back to Main Menu</a>
+        </div>
+    </div>
+     <script src="language.js"></script>
+    <script>
+        // Current language
+        let currentLanguage = localStorage.getItem('gameLanguage') || 'en';
+        
+        // Load saved settings when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSettings();
+            
+            // Update volume percentage display
+            document.getElementById('masterVolume').addEventListener('input', function() {
+                document.getElementById('volumeValue').textContent = this.value + '%';
+            });
+            
+            // Set initial language
+            changeLanguage(currentLanguage);
+            document.getElementById('language').value = currentLanguage;
+            
+            // Language selector change event
+            document.getElementById('language').addEventListener('change', function() {
+                changeLanguage(this.value);
+            });
+        });
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.body.setAttribute('dir', lang === 'ku' ? 'rtl' : 'ltr');
+            
+            // Update language buttons
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === (lang === 'en' ? 'English' : 'کوردی'));
+            });
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en], [data-ku]').forEach(element => {
+                if (element.dataset[lang]) {
+                    if (element.tagName === 'OPTION') {
+                        element.textContent = element.dataset[lang];
+                    } else if (element.tagName === 'LABEL') {
+                        element.textContent = element.dataset[lang];
+                    } else {
+                        element.textContent = element.dataset[lang];
+                    }
+                }
+            });
+            
+            // Save language preference
+            localStorage.setItem('gameLanguage', lang);
+            
+            // Update the language in all pages
+            updateAllPagesLanguage(lang);
+        }
+
+        function loadSettings() {
+            // Load settings from localStorage or use defaults
+            const settings = JSON.parse(localStorage.getItem('gameSettings')) || {};
+            
+            // Audio settings
+            if (settings.masterVolume !== undefined) {
+                document.getElementById('masterVolume').value = settings.masterVolume;
+                document.getElementById('volumeValue').textContent = settings.masterVolume + '%';
+            }
+            if (settings.soundEffects !== undefined) {
+                document.getElementById('soundEffects').checked = settings.soundEffects;
+            }
+            if (settings.bgMusic !== undefined) {
+                document.getElementById('bgMusic').checked = settings.bgMusic;
+            }
+            
+            // Control settings
+            if (settings.controlScheme !== undefined) {
+                document.getElementById('controlScheme').value = settings.controlScheme;
+            }
+            if (settings.buttonSize !== undefined) {
+                document.getElementById('buttonSize').value = settings.buttonSize;
+            }
+            
+            // Display settings
+            if (settings.theme !== undefined) {
+                document.getElementById('theme').value = settings.theme;
+            }
+            if (settings.animations !== undefined) {
+                document.getElementById('animations').checked = settings.animations;
+            }
+            if (settings.language !== undefined) {
+                document.getElementById('language').value = settings.language;
+            }
+        }
+
+        function saveSettings() {
+            const settings = {
+                // Audio settings
+                masterVolume: parseInt(document.getElementById('masterVolume').value),
+                soundEffects: document.getElementById('soundEffects').checked,
+                bgMusic: document.getElementById('bgMusic').checked,
+                
+                // Control settings
+                controlScheme: document.getElementById('controlScheme').value,
+                buttonSize: document.getElementById('buttonSize').value,
+                
+                // Display settings
+                theme: document.getElementById('theme').value,
+                animations: document.getElementById('animations').checked,
+                // language: document.getElementById('language').value
+            };
+            
+            localStorage.setItem('gameSettings', JSON.stringify(settings));
+            
+            // Show confirmation in current language
+            alert(currentLanguage === 'en' 
+                ? 'Settings saved successfully!' 
+                : 'ڕێکخستنەکان بە سەرکەوتوویی پاشەکەوتکران!');
+                
+            // Update language if changed
+            if (settings.language !== currentLanguage) {
+                changeLanguage(settings.language);
+            }
+        }
+
+        function resetSettings() {
+            const confirmMsg = currentLanguage === 'en'
+                ? 'Are you sure you want to reset all settings to default?'
+                : 'دڵنیایت کە دەتەوێت هەموو ڕێکخستنەکان بگەڕێنیتەوە بۆ ڕێکخستنی بنەڕەتی؟';
+                
+            if (confirm(confirmMsg)) {
+                localStorage.removeItem('gameSettings');
+                loadSettings(); // This will load defaults since settings are now null
+                
+                const alertMsg = currentLanguage === 'en'
+                    ? 'Settings have been reset to default.'
+                    : 'ڕێکخستنەکان گەڕێندرانەوە بۆ ڕێکخستنی بنەڕەتی.';
+                alert(alertMsg);
+            }
+        }
+
+        // Function to update language across all pages
+        function updateAllPagesLanguage(lang) {
+            // This would be called whenever language changes
+            // In a real implementation, you would:
+            // 1. Save the language preference to localStorage
+            // 2. Have each page check this preference on load
+            // 3. Apply the appropriate language
+            console.log(`Language changed to ${lang}. All pages should reload with this language.`);
+        }
+    </script>
+    
+</body>
+</html>
